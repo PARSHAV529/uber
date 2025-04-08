@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+  </head>
+  <body onload="routeCheck()">
+    <div class="container">
+      <!-- Sidebar -->
+
+      <%- include('adminSider')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <h4>Requests for Document Verification</h4>
+
+        <div class="serch-driver-request-pagination">
+          <div class="search">
+            <input
+              type="text"
+              class="search-input"
+              id="search-input"
+              placeholder="search driver request by his name"
+            />
+            <div class="search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+          </div>
+          <div class="pagination">
+            <button><<</button>
+            <button><</button>
+            <button>1</button>
+            <button>></button>
+            <button>>></button>
+          </div>
+        </div>
+        <div
+          class="recent-activity-container"
+          id="recent-activity-container"
+        ></div>
+      </div>
+    </div>
+
+    <script src="/js/admin/documents.js"></script>
+  </body>
+</html>

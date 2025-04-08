@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uber-Go</title>
+    <link rel="stylesheet" href="/css/rider/riderRideAccepted.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('riderSidebar')%>
+      <div class="sidebar">
+        <div class="heading">
+          <i class="fas fa-bars"></i>
+          <span>Uber</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/uber/rider/go" id="Home"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li>
+              <a href="/uber/rider/history" id="Rides"
+                ><i class="fas fa-car"></i> Rides</a
+              >
+            </li>
+            <li>
+              <a
+                href="javascript:void(0);"
+                id="About"
+                onclick="toggleDropdown()"
+                aria-expanded="false"
+              >
+                <i class="fas fa-history"></i> About
+              </a>
+              <div class="dropdown" id="aboutDropdown">
+                <a href="">About Us</a>
+                <a href="">Blogs</a>
+                <a href="">Our Offers</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <div class="profile">
+          <img src="https://placehold.co/40x40" alt="User profile picture" />
+          <div><p>John Rider</p></div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-content">
+          <div class="driver-info">
+            <div class="header"><p>Driver Information</p></div>
+            <div><i class="fa-regular fa-user"></i></div>
+            <div>
+              <p id="driver-name"></p>
+              <p class="fade-color" id="vehicle-info"></p>
+            </div>
+            <div class="buttons">
+              <button id="call-btn">Call Driver</button>
+            </div>
+          </div>
+          <div class="trip-info">
+            <div class="header"><p>Trip Information</p></div>
+            <div class="trip-info-content">
+              <div>
+                <div><i class="fa-solid fa-location-dot"></i></div>
+                <div class="trip-text-content">
+                  <span>Pickup</span>
+                  <span class="fade-color" id="pickup-location"></span>
+                </div>
+              </div>
+              <div>
+                <div><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="trip-text-content">
+                  <span>Destination</span>
+                  <span class="fade-color" id="drop-location"></span>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <img
+                    alt="payment-method"
+                    height="20px"
+                    src="/source/credit.png"
+                  />
+                </div>
+                <div class="trip-text-content">
+                  <span>Payment Method</span>
+                  <span class="fade-color">Cash</span>
+                </div>
+              </div>
+            </div>
+            <div class="ride-otp">
+              <div><p>OTP:</p></div>
+              <div class="otp">
+                <span id="otp-text"></span>
+                <i
+                  class="fa-regular fa-copy copy-btn"
+                  style="font-size: 22px"
+                ></i>
+              </div>
+            </div>
+            <div class="trip-buttons">
+              <button id="cancel-ride-btn">Cancel Ride</button>
+              <button id="share-btn">Share Trip Status</button>
+            </div>
+          </div>
+
+          <!-- Modal for cancel reason -->
+          <div id="cancelRideModal" class="modal">
+            <div class="modal-content">
+              <span class="close-modal" id="closeModal">×</span>
+              <h2>Why are you canceling your ride?</h2>
+              <form id="cancelReasonForm">
+                <select id="cancelReason" name="reason" required>
+                  <option value="" disabled selected>Select a reason</option>
+                  <option value="changed_mind">Changed my mind</option>
+                  <option value="driver_delay">Driver delay</option>
+                  <option value="wrong_destination">Wrong destination</option>
+                  <option value="other">Other</option>
+                </select>
+                <textarea
+                  id="otherReason"
+                  name="otherReason"
+                  placeholder="Please specify (optional)"
+                  style="display: none"
+                ></textarea>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="reviewRideModal">
+          <div class="review-content">
+            <div>
+              <span class="close-review-modal" id="closeReviewModal">×</span>
+            </div>
+            <h2>Share your ride experience</h2>
+            <div class="rating">
+              <i
+                class="fa-regular fa-face-angry rate"
+                style="color: rgb(224, 15, 15)"
+                data-value="1"
+              ></i>
+              <i
+                class="fa-regular fa-face-frown rate"
+                style="color: rgb(219, 68, 93)"
+                data-value="2"
+              ></i>
+              <i
+                class="fa-regular fa-face-meh rate"
+                style="color: rgb(146, 146, 34)"
+                data-value="3"
+              ></i>
+              <i
+                class="fa-regular fa-face-smile rate"
+                style="color: rgb(8, 184, 8)"
+                data-value="4"
+              ></i>
+              <i
+                class="fa-solid fa-face-laugh-beam rate"
+                style="color: rgb(2, 63, 2)"
+                data-value="5"
+              ></i>
+            </div>
+            <div><button class="rate-btn">Submit</button></div>
+          </div>
+        </div>
+        <div class="main-map">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
+    <script>
+      let mapInstance,
+        olaMapsInstance,
+        driverMarker,
+        routePolyline = [];
+      let sourceCoords, destCoords;
+      let currentDriverIndex = 0;
+      let trackingInterval;
+
+      const olaMaps = new OlaMaps({
+        apiKey: "jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz",
+      });
+      olaMapsInstance = olaMaps;
+
+      mapInstance = olaMaps.init({
+        style:
+          "https://api.olamaps.io/tiles/vector/v1/styles/default-light-standard/style.json",
+        container: "map",
+        center: [72.5714, 23.0225],
+        zoom: 12,
+      });
+
+      function decodePolyline(encoded) {
+        let points = [];
+        let index = 0,
+          len = encoded.length;
+        let lat = 0,
+          lng = 0;
+        while (index < len) {
+          let b,
+            shift = 0,
+            result = 0;
+          do {
+            b = encoded.charCodeAt(index++) - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+          } while (b >= 0x20);
+          let dlat = result & 1 ? ~(result >> 1) : result >> 1;
+          lat += dlat;
+          shift = 0;
+          result = 0;
+          do {
+            b = encoded.charCodeAt(index++) - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+          } while (b >= 0x20);
+          let dlng = result & 1 ? ~(result >> 1) : result >> 1;
+          lng += dlng;
+          points.push([lng / 1e5, lat / 1e5]);
+        }
+        return points;
+      }
+
+      async function calculateRoute(sourceCoords, destCoords) {
+        if (!sourceCoords || !destCoords) {
+          alert("Please select both source and destination");
+          return;
+        }
+        console.log("Source Coordinates:", sourceCoords);
+        console.log("Destination Coordinates:", destCoords);
+
+        try {
+          const response = await fetch(
+            `https://api.olamaps.io/routing/v1/directions?origin=${sourceCoords[1]},${sourceCoords[0]}&destination=${destCoords[1]},${destCoords[0]}&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`,
+            { method: "POST" }
+          );
+          const data = await response.json();
+          console.log("Directions API response:", data);
+
+          if (
+            data.status === "SUCCESS" &&
+            data.routes &&
+            data.routes.length > 0
+          ) {
+            const route = data.routes[0];
+            routePolyline = decodePolyline(route.overview_polyline);
+            routePolyline.unshift(sourceCoords);
+            routePolyline.push(destCoords);
+
+            const routeGeojson = {
+              type: "Feature",
+              geometry: { type: "LineString", coordinates: routePolyline },
+            };
+            if (mapInstance.getSource("route-source")) {
+              mapInstance.getSource("route-source").setData(routeGeojson);
+            } else {
+              mapInstance.addSource("route-source", {
+                type: "geojson",
+                data: routeGeojson,
+              });
+              mapInstance.addLayer({
+                id: "route-layer",
+                type: "line",
+                source: "route-source",
+                paint: {
+                  "line-color": "blue",
+                  "line-width": 5,
+                  "line-opacity": 1,
+                },
+              });
+            }
+
+            // Add pickup marker (rider location)
+            if (window.destMarker) window.destMarker.remove();
+            const destMarkerElement = document.createElement("div");
+            destMarkerElement.classList.add(
+              "fa-solid",
+              "fa-location-crosshairs"
+            );
+            destMarkerElement.style.fontSize = "24px";
+            destMarkerElement.style.color = "red";
+            window.destMarker = olaMapsInstance
+              .addMarker({
+                element: destMarkerElement,
+                offset: [0, 0],
+                anchor: "center",
+              })
+              .setLngLat(destCoords)
+              .addTo(mapInstance);
+
+            // Add initial driver marker
+            if (driverMarker) driverMarker.remove();
+            const driverMarkerElement = document.createElement("div");
+            driverMarkerElement.classList.add("fa-solid", "fa-taxi");
+            driverMarkerElement.style.fontSize = "24px";
+
+            driverMarker = olaMapsInstance
+              .addMarker({
+                element: driverMarkerElement,
+                offset: [0, 0],
+                anchor: "center",
+              })
+              .setLngLat(sourceCoords)
+              .addTo(mapInstance);
+
+            const bounds = routePolyline.reduce(
+              (bounds, coord) => [
+                [
+                  Math.min(bounds[0][0], coord[0]),
+                  Math.min(bounds[0][1], coord[1]),
+                ],
+                [
+                  Math.max(bounds[1][0], coord[0]),
+                  Math.max(bounds[1][1], coord[1]),
+                ],
+              ],
+              [sourceCoords, sourceCoords]
+            );
+            mapInstance.fitBounds(bounds, { padding: 100, maxZoom: 15 });
+          } else {
+            alert("No route found");
+          }
+        } catch (error) {
+          console.error("Routing error:", error);
+          alert("Error calculating route");
+        }
+      }
+
+      function updateDriverPosition() {
+        if (currentDriverIndex < routePolyline.length - 1) {
+          currentDriverIndex += 1;
+          if (currentDriverIndex >= routePolyline.length) {
+            currentDriverIndex = routePolyline.length - 1;
+          }
+
+          const newDriverCoords = routePolyline[currentDriverIndex];
+          driverMarker.setLngLat(newDriverCoords);
+          console.log("Driver moved to:", newDriverCoords);
+
+          const remainingPolyline = routePolyline.slice(currentDriverIndex);
+          const routeGeojson = {
+            type: "Feature",
+            geometry: { type: "LineString", coordinates: remainingPolyline },
+          };
+          mapInstance.getSource("route-source").setData(routeGeojson);
+        } else {
+          alert("your driver is arrived");
+          console.log("Driver reached destination");
+          clearInterval(trackingInterval);
+        }
+      }
+
+      function startLiveTracking() {
+        clearInterval(trackingInterval);
+        trackingInterval = setInterval(updateDriverPosition, 2000); // Update every 2 seconds
+      }
+
+      window.addEventListener("load", async () => {
+        try {
+          const response = await fetch("/uber/api/rider/get-directions");
+          if (response.status === 201) {
+            let data = await response.json();
+            console.log(data.data[0][0]);
+
+            // Fetch pickup coordinates
+            const srcResponse = await fetch(
+              `https://api.olamaps.io/places/v1/geocode?address=${data.data[0][0].pickup_location}&language=hi&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`
+            );
+            sourceCoords = await srcResponse.json();
+            sourceCoords = [
+              sourceCoords.geocodingResults[0].geometry.location.lng,
+              sourceCoords.geocodingResults[0].geometry.location.lat,
+            ];
+
+            // Use driver's live location as starting point
+            destCoords = [
+              data.data[0][0].live_location.lng,
+              data.data[0][0].live_location.lat,
+            ];
+
+            // Calculate initial route and start tracking
+            await calculateRoute(destCoords, sourceCoords); // Note: destCoords is driver’s starting point, sourceCoords is pickup
+            startLiveTracking();
+
+            if (!data.data[0][0]) {
+              location.href = "/uber/rider/go";
+              return;
+            }
+            document.getElementById("pickup-location").innerText =
+              data.data[0][0].pickup_location;
+            document.getElementById("drop-location").innerText =
+              data.data[0][0].drop_location;
+            document.getElementById(
+              "vehicle-info"
+            ).innerText = `${data.data[0][0].type}, ${data.data[0][0].number_plate}, ${data.data[0][0].colour}`;
+            document.getElementById("otp-text").innerText = data.data[0][0].otp;
+            document.getElementById(
+              "driver-name"
+            ).innerText = `${data.data[0][0].first_name} ${data.data[0][0].last_name}`;
+          } else {
+            location.href = "/uber/rider/go";
+          }
+        } catch (error) {
+          console.error("Error fetching directions:", error);
+          location.href = "/uber/rider/go";
+        }
+      });
+
+      const cancelRideBtn = document.getElementById("cancel-ride-btn");
+      const modal = document.getElementById("cancelRideModal");
+      const closeModal = document.getElementById("closeModal");
+      const reasonSelect = document.getElementById("cancelReason");
+      const otherReasonTextarea = document.getElementById("otherReason");
+      const cancelReasonForm = document.getElementById("cancelReasonForm");
+
+      cancelRideBtn.addEventListener("click", () => {
+        document.body.classList.add("blur-background");
+        modal.style.display = "flex";
+      });
+
+      closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.body.classList.remove("blur-background");
+      });
+
+      reasonSelect.addEventListener("change", () => {
+        otherReasonTextarea.style.display =
+          reasonSelect.value === "other" ? "block" : "none";
+      });
+
+      cancelReasonForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const reason =
+          reasonSelect.value === "other"
+            ? otherReasonTextarea.value
+            : reasonSelect.value;
+        if (!reason) {
+          alert("Please provide a reason.");
+          return;
+        }
+        try {
+          const response = await fetch("/uber/api/rider/cancel-ride", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reason }),
+          });
+          if (response.status === 201) {
+            location.href = "/uber/rider/go";
+          } else {
+            let data = await response.json();
+            console.log(data.message);
+          }
+        } catch (error) {
+          console.error("Error canceling ride:", error);
+        }
+        modal.style.display = "none";
+        document.body.classList.remove("blur-background");
+      });
+
+      document
+        .getElementsByClassName("copy-btn")[0]
+        .addEventListener("click", (e) => {
+          const copyText = document.getElementById("otp-text").innerText;
+          navigator.clipboard.writeText(copyText).then(() => {
+            e.target.classList.remove("fa-regular");
+            e.target.classList.add("fa-solid");
+            setTimeout(() => {
+              e.target.classList.remove("fa-solid");
+              e.target.classList.add("fa-regular");
+            }, 1000);
+          });
+        });
+
+      function toggleDropdown() {
+        const dropdown = document.getElementById("aboutDropdown");
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
+      }
+
+      const rateButtons = document.getElementsByClassName("rate");
+      for (let button of rateButtons) {
+        button.addEventListener("click", addRating);
+      }
+
+      function addRating(e) {
+        for (let button of rateButtons) {
+          if (button.classList.contains("fa-solid")) {
+            button.classList.remove("fa-solid");
+            button.classList.add("fa-regular");
+          }
+        }
+        if (e.target.classList.contains("fa-regular")) {
+          e.target.classList.remove("fa-regular");
+          e.target.classList.add("fa-solid");
+        } else {
+          e.target.classList.remove("fa-solid");
+          e.target.classList.add("fa-regular");
+        }
+      }
+
+      const closeReviewModal = document.getElementById("closeReviewModal");
+      const reviewModal = document.getElementsByClassName("reviewRideModal")[0];
+
+      closeReviewModal.addEventListener("click", () => {
+        reviewModal.style.display = "none";
+      });
+
+      document
+        .getElementsByClassName("rate-btn")[0]
+        .addEventListener("click", async (e) => {
+          let rateText;
+          for (let button of rateButtons) {
+            if (button.classList.contains("fa-solid")) {
+              rateText = button.dataset.value;
+            }
+          }
+          console.log(rateText);
+          const response = await fetch("/uber/api/rider/ride-review", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ rateText, trip_id: 3 }),
+          });
+          if (response.status === 201) {
+            location.href = "/uber/rider/go";
+          }
+        });
+
+      setTimeout(() => {
+        document.getElementsByClassName("reviewRideModal")[0].style.display =
+          "flex";
+      }, 3000);
+    </script>
+  </body>
+</html>

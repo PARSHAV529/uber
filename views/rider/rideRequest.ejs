@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uber-go</title>
+    <link rel="stylesheet" href="/css/rider/rideRequest.css" />
+    <script
+      src="https://apis.mapmyindia.com/advancedmaps/api/43c2fc7cb353b21531b0f2d76c25a0af/map_sdk?layer=vector&v=2.0&callback=initMap"
+      defer
+      async
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <div class="ride-info">
+          <div>
+            <div><h2>Confirming your ride</h2></div>
+            <div class="progress-container">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+          </div>
+          <div class="pickup-location ride-info-content">
+            <div>
+              <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                <title>Radio button selected</title>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11Zm0-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <div><p id="pickup-location">city center 2</p></div>
+            <div class="src-to-dst-line"></div>
+          </div>
+          <div class="dropoff-location ride-info-content">
+            <div class="_css-ipqQZy">
+              <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                <title>Dropoff</title>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 2H2v20h20V2Zm-7 7H9v6h6V9Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <div class="trip-text-content"></div>
+            <div><p id="drop-location">silver radiance 2</p></div>
+          </div>
+          <div class="ride-info-content">
+            <div>
+              <img
+                alt="payment-method"
+                height="20px"
+                src="https://tb-static.uber.com/prod/wallet/icons/cash_3x.png"
+              />
+            </div>
+            <div class="ride-info-payment">
+              <p id="fare-amount">100</p>
+              <p>cash</p>
+            </div>
+          </div>
+          <div>
+            <button class="cancel-ride-btn">Cancel ride</button>
+          </div>
+        </div>
+
+        <div id="cancelRideModal" class="modal">
+          <div class="modal-content">
+            <span class="close-modal" id="closeModal">×</span>
+            <h2>Why are you canceling your ride?</h2>
+            <form id="cancelReasonForm">
+              <select id="cancelReason" name="reason" required>
+                <option value="" disabled selected>Select a reason</option>
+                <option value="changed_mind">Changed my mind</option>
+                <option value="driver_delay">Driver delay</option>
+                <option value="wrong_destination">Wrong destination</option>
+                <option value="other">Other</option>
+              </select>
+              <textarea
+                id="otherReason"
+                name="otherReason"
+                placeholder="Please specify (optional)"
+                style="display: none;"
+              ></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="main-map">
+        <div id="map"></div>
+      </div>
+
+      <script>
+        let waitingInterval = null;
+        let progress = 0; 
+        const progressBar = document.getElementById("progressBar");
+        const maxWaitingProgress = 100;
+        const increment = 5;
+        const intervalTime = 1000;
+
+        
+        function startProgress() {
+          if (progress >= maxWaitingProgress) return; 
+          waitingInterval = setInterval(() => {
+            if (progress < maxWaitingProgress) {
+              progress += increment;
+              progressBar.style.width = `${progress}%`;
+            } else {
+              clearInterval(waitingInterval);
+              location.href='/uber/rider/accepted'
+            }
+          }, intervalTime);
+        }
+
+        
+        function stopProgress() {
+          if (waitingInterval) {
+            clearInterval(waitingInterval);
+            waitingInterval = null;
+          }
+        }
+
+        window.addEventListener("load", async () => {
+          try {
+            const response = await fetch("/uber/api/rider/get-directions");
+            if (response.status === 201) {
+              let data = await response.json();
+              console.log("directions", data.data[0][0].fare_amount);
+              document.getElementById("pickup-location").innerText = data.data[0][0].pickup_location;
+              document.getElementById("drop-location").innerText = data.data[0][0].drop_location;
+              document.getElementById("fare-amount").innerText = data.data[0][0].fare_amount;
+            } else {
+              location.href = "/uber/rider/go";
+            }
+          } catch (error) {
+            console.error("Error fetching directions:", error);
+            location.href = "/uber/rider/go";
+          }
+
+          
+          startProgress();
+        });
+
+        const cancelRideBtn = document.getElementsByClassName("cancel-ride-btn")[0];
+        const modal = document.getElementById("cancelRideModal");
+        const closeModal = document.getElementById("closeModal");
+        const reasonSelect = document.getElementById("cancelReason");
+        const otherReasonTextarea = document.getElementById("otherReason");
+        const cancelReasonForm = document.getElementById("cancelReasonForm");
+
+        cancelRideBtn.addEventListener("click", () => {
+          stopProgress(); 
+          document.body.classList.add("blur-background");
+          modal.style.display = "flex";
+        });
+
+        closeModal.addEventListener("click", () => {
+          modal.style.display = "none";
+          document.body.classList.remove("blur-background");
+          startProgress(); 
+        });
+
+        reasonSelect.addEventListener("change", () => {
+          otherReasonTextarea.style.display = reasonSelect.value === "other" ? "block" : "none";
+        });
+
+        cancelReasonForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const reason = reasonSelect.value === "other" ? otherReasonTextarea.value : reasonSelect.value;
+          if (!reason) {
+            alert("Please provide a reason.");
+            return;
+          }
+          try {
+            const response = await fetch("/uber/api/rider/cancel-ride", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ reason }),
+            });
+            if (response.status === 201) {
+              location.href = "/uber/rider/go";
+            } else {
+              let data = await response.json();
+              console.log(data.message);
+            }
+          } catch (error) {
+            console.error("Error canceling ride:", error);
+          }
+          modal.style.display = "none";
+          document.body.classList.remove("blur-background");
+         
+        });
+
+        let source = { lat: 28.6139, lng: 77.209 };
+        const drivers = [
+          { id: 1, lat: 28.6139, lng: 77.21 },
+          { id: 2, lat: 28.62, lng: 77.22 },
+          { id: 3, lat: 28.61, lng: 77.23 },
+          { id: 4, lat: 28.65, lng: 77.25 },
+        ];
+
+        function getDistance(lat1, lon1, lat2, lon2) {
+          const R = 6371;
+          const dLat = ((lat2 - lat1) * Math.PI) / 180;
+          const dLon = ((lon2 - lon1) * Math.PI) / 180;
+          const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          return R * c;
+        }
+
+        function initMap() {
+          if (typeof MapmyIndia === "undefined") {
+            console.error("MapmyIndia SDK not loaded");
+            return;
+          }
+          const map = new MapmyIndia.Map("map", {
+            center: [source.lat, source.lng],
+            zoomControl: true,
+            zoom: 12,
+            hybrid: true,
+          });
+
+          new MapmyIndia.Marker({
+            map: map,
+            position: { lat: source.lat, lng: source.lng },
+            draggable: true,
+            title: "Rider",
+          });
+
+          new MapmyIndia.Circle({
+            map: map,
+            center: { lat: source.lat, lng: source.lng },
+            radius: 3000,
+            fillOpacity: 0.3,
+            fillColor: "black",
+            strokeColor: "red",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+          });
+
+          const nearbyDrivers = drivers.filter(
+            (driver) => getDistance(source.lat, source.lng, driver.lat, driver.lng) <= 3
+          );
+
+          nearbyDrivers.forEach((driver) => {
+            new MapmyIndia.Marker({
+              map: map,
+              position: { lat: driver.lat, lng: driver.lng },
+              title: `Driver ${driver.id}`,
+            });
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>

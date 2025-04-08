@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sider</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/admin/adminSider.css" />
+  </head>
+
+  <body>
+    <div class="admin-sidebar">
+      <div class="header">
+        <i class="fas fa-bars"></i>
+        <!-- <img src="/source/uberLogo.png" /> -->
+        <span>Uber Admin</span>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a
+              href="/uber/admin"
+              id="Home"
+              class="active"
+              onclick="addActiveClass(event)"
+              ><i class="fas fa-home"></i> Dashboard</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="/uber/admin/documents"
+              id="Docs"
+              onclick="addActiveClass(event)"
+              ><i class="fa-solid fa-id-card"></i>Documents verification</a
+            >
+          </li>
+          <li>
+            <a
+              href="/uber/admin/reports"
+              id="Report"
+              onclick="addActiveClass(event)"
+              ><i class="fa-solid fa-square-poll-vertical"></i> Report</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="/uber/admin/users"
+              id="Drivers"
+              onclick="addActiveClass(event)"
+              ><i class="fa-solid fa-users"></i> Users</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="profile">
+        <img src="https://placehold.co/40x40" alt="User profile picture" />
+        <div>
+          <p>Admin</p>
+          <p class="status">Online</p>
+        </div>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>

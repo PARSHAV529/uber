@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uber-history</title>
+    <link rel="stylesheet" href="/css/rider/riderRideHistory.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="heading">
+          <i class="fas fa-bars"></i>
+          <span>Uber</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/uber/rider/go" id="Home"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li>
+              <a href="#" class="active" id="Rides"
+                ><i class="fas fa-car"></i> Rides</a
+              >
+            </li>
+            <!-- <li>
+                        <a href="#" id="Payments"><i class="fas fa-wallet"></i> Driver</a>
+                    </li> -->
+            <li>
+              <a
+                href="javascript:void(0);"
+                id="About"
+                onclick="toggleDropdown()"
+                aria-expanded="false"
+                ><i class="fas fa-history"></i> About</a
+              >
+
+              <div class="dropdown" id="aboutDropdown">
+                <a href=""> About Us</a>
+                <a href="">Blogs</a>
+                <a href="">Our Offers</a>
+              </div>
+            </li>
+            <!-- <li>
+                        <a href="#" id="Settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li> -->
+          </ul>
+        </nav>
+        <div class="profile">
+          <img src="https://placehold.co/40x40" alt="User profile picture" />
+          <div>
+            <p>John Rider</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-content">
+          <div class="upcoming-content">
+            <div class="header"><p>Upcoming</p></div>
+            <div class="upcoming-cards">
+              <div class="upcoming-cards-image"></div>
+              <div>
+                <p>You have no upcoming rides</p>
+              </div>
+              <div>
+                <button class="reserve-ride-btn" onclick="reserveRide()">
+                  <div class="_css-hdjfHk">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <title>Car clock</title>
+                      <path
+                        d="M18 0c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6Zm3 7h-4V2h2v3h2v2Z"
+                        fill="currentColor"
+                      ></path>
+                      ,
+                      <path
+                        d="M18.2 14H18c-3.7 0-6.9-2.6-7.8-6H6.4c-.9 0-1.6.5-1.9 1.3L2.8 14H1v3h1v6h4v-1h9v1h4v-6h1v-3h-1.8ZM8 19H4v-2h4v2Zm9 0h-4v-2h4v2Z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span>Reserve ride</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="past-content">
+            <div class="header"><p>Past</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleDropdown() {
+        console.log("toggle");
+        const dropdown = document.getElementById("aboutDropdown");
+        const toggleLink = document.querySelector("#About");
+        dropdown.classList.toggle("show");
+        toggleLink.setAttribute(
+          "aria-expanded",
+          dropdown.classList.contains("show")
+        );
+      }
+
+      window.onclick = function (event) {
+        if (!event.target.matches("#About")) {
+          const dropdowns = document.getElementsByClassName("dropdown");
+          for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+              const toggleLink = document.querySelector("#About");
+              toggleLink.setAttribute("aria-expanded", "false");
+            }
+          }
+        }
+      };
+
+      window.addEventListener("load", async () => {
+        console.log("get details");
+        const response = await fetch("/uber/api/rider/get-history");
+
+        if (response.status === 201) {
+          let data = await response.json();
+
+          generateCards(data.data[0]);
+        } else {
+          let data = await response.json();
+          console.log(data.message);
+        }
+      });
+
+      function generateCards(data) {
+        console.log(data);
+
+        data.forEach((element) => {
+          console.log("location", element.pickup_location);
+
+          const pastCards = document.createElement("div");
+          pastCards.className = "past-cards";
+
+          const div = document.createElement("div");
+
+          const image = document.createElement("img");
+          image.height = "124";
+
+          if (element.vehicle_preference === "auto") {
+            image.src =
+              "https://d1a3f4spazzrp4.cloudfront.net/car-types/haloProductImages/v1.1/TukTuk_Green_v1.png";
+          } else if (element.vehicle_preference === "cab") {
+            image.src =
+              "https://d1a3f4spazzrp4.cloudfront.net/car-types/haloProductImages/package_UberComfort_new_2022.png";
+          } else if (element.vehicle_preference === "moto") {
+            image.src =
+              "https://d1a3f4spazzrp4.cloudfront.net/car-types/haloProductImages/v1.1/Uber_Moto_India1.png";
+          }
+
+          div.appendChild(image);
+
+          pastCards.appendChild(div);
+
+          const rideInfo = document.createElement("div");
+          rideInfo.className = "ride-info-content";
+
+          rideInfo.innerHTML = `<div style='display:flex;align-items:center;gap:5px;'><p>${element.pickup_location}</p>
+                                <i class="fa-solid fa-arrow-right"></i><p>${element.drop_location}</p></div>
+                              <p>${element.created_at}</p>
+                              <p>${element.fare_amount}, ${element.status}</p>`;
+
+          pastCards.appendChild(rideInfo);
+
+          document
+            .getElementsByClassName("past-content")[0]
+            .appendChild(pastCards);
+        });
+      }
+
+      function reserveRide() {
+        location.href = "/uber/rider/go";
+      }
+    </script>
+  </body>
+</html>

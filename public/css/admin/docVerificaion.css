@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* ..............main............. */
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 250px;
+}
+
+.main-content h4 {
+    margin: 30px 0 20px 0;
+}
+
+.document-list-container,.vehicle-document-list-container {
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.driver-doc-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 5px;
+    border-bottom: 1px solid #f4f4f4;
+    width: 100%;
+}
+
+.driver-info{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.driver-info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.doc-type, .driver-name, .doc-status {
+    font-weight: 500;
+}
+
+.doc-type{
+    display: inline-block;
+    width: 200px;
+}
+
+.doc-status,
+.driver-doc-list i{
+    color: #6c757d;
+}
+
+.submission-date {
+    font-size: 12px;
+    color: #adb5bd;
+    display: inline-block;
+    width: 100px;
+}
+
+.view-doc {
+    background: black;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.view-doc i {
+    color: white;
+}
+
+.view-doc:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* .........driver document modal........ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 60px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 700px;
+    max-height: 90%;
+    max-width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.modal-image-container {
+    margin-top: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+}
+
+#modalImage {
+    width: 1000px;
+    height: 1000px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.doc-reject-input{
+    width: 100%;
+    padding: 10px 0 10px 12px;
+    border-radius: 8px;
+    background-color: #eee;
+    border: 2px solid transparent;
+    line-height: 24px;
+    margin: 8px 0px;
+    font-size: 16px;
+}
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.modal-accept-btn{
+    background-color: black;
+    color: white;
+    padding: 8px;
+    width: fit-content;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.modal-accept-btn:hover{
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+}
+
+.modal-reject-btn {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    padding: 8px;
+    font-weight: 700;
+    width: fit-content;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modal-reject-btn:hover{
+    background-color: black;
+    color: white;
+}
+
+.vehicle-btns{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 30px;
+    margin-top: 10px;
+    padding: 5px 0;
+}
+
+.vehicle-accept, .vehicle-reject{
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    color: #000000;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.vehicle-accept:hover{
+    color: rgba(0, 128, 0,0.6);
+    border-bottom: 1px solid rgba(0, 128, 0,0.6);
+    cursor: pointer;
+}
+
+.vehicle-reject:hover {
+    color: rgba(255, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 0, 0 ,0.6);
+    cursor: pointer;
+}
+
+.driver-btns{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.driver-accept,.driver-reject{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: fit-content;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.driver-reject:hover{
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.driver-accept:hover {
+    background-color: rgba(0, 128, 0, 0.6);
+    border: 1px solid rgba(0, 128, 0, 0.5);
+}

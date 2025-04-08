@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/rider/riderRideSetup.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <title>uber-go</title>
+  <script src="https://kit.fontawesome.com/7ed32dcceb.js" crossorigin="anonymous"></script>
+  <script
+    src="https://apis.mapmyindia.com/advancedmaps/api/43c2fc7cb353b21531b0f2d76c25a0af/map_sdk?layer=vector&v=2.0&callback=initMap1"
+    defer async></script>
+</head>
+
+<body>
+  <div class="container">
+    <%- include('riderSidebar')%>
+
+    <div class="wrapper">
+      <div class="main-content">
+        <fieldset>
+          <div>
+            <h3 class="ride-info-header">Get a ride</h3>
+          </div>
+          <div class="select-location">
+            <div class="select-location-fields">
+              <div class="field-content">
+                <div>
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" data-testid="pickup-icon"
+                    data-movable-handle="true">
+                    <title>Radio button selected</title>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11Zm0-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </div>
+                <div>
+                  <input class="inputs" type="text" name="pickup-location" id="pickup-location"
+                    placeholder="Pickup location" value="<%=data.start%>" />
+                </div>
+              </div>
+              
+              <div>
+                <div id="pickup-location-clear">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" data-baseweb="icon"
+                    aria-label="Clear value" role="button">
+                    <title>Clear value</title>
+                    <path
+                      d="M12 1C5.9 1 1 5.9 1 12s4.9 11 11 11 11-4.9 11-11S18.1 1 12 1Zm6 15-2 2-4-4-4 4-2-2 4-4-4-4 2-2 4 4 4-4 2 2-4 4 4 4Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div id="source-suggestions" class="suggestions"></div>
+            <div class="select-location-fields">
+              <div class="field-content">
+                <div>
+                  <div class="_css-ipqQZy">
+                    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" data-testid="drop-icon"
+                      data-movable-handle="true">
+                      <title>Dropoff</title>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M22 2H2v20h20V2Zm-7 7H9v6h6V9Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <input class="inputs" type="text" name="dropoff-location" id="dropoff-location"
+                    placeholder="Dropoff location" value="<%=data.dest%>" />
+                    
+                </div>
+              </div>
+              
+              <div>
+                <div id="dropoff-location-clear">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" data-baseweb="icon"
+                    aria-label="Clear value" role="button">
+                    <title>Clear value</title>
+                    <path
+                      d="M12 1C5.9 1 1 5.9 1 12s4.9 11 11 11 11-4.9 11-11S18.1 1 12 1Zm6 15-2 2-4-4-4 4-2-2 4-4-4-4 2-2 4 4 4-4 2 2-4 4 4 4Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div id="destination-suggestions" class="suggestions"></div>
+            <div class="btn">
+              <button id="search-btn" disabled>Search<div class="loader" id="loader"></div></button>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="content hidden">
+          <div id="vehicle-cards">
+
+          </div>
+
+          <div>
+            <div class="payment">
+              <div style="display: flex; gap: 5px; align-items: center">
+                <div>
+                  <img alt="payment-method" height="20px" src="/source/credit.png" />
+                </div>
+                <div>
+                  <select name="payment-method" id="payment-method">
+                    <option value="default">Add payment Method</option>
+                    <option value="cash">cash</option>
+                    <option value="upi">upi</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button class="request-btn">Request Uber Go</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-map">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Add payment method</h2>
+      </div>
+      <div class="modal-body">
+        <span style='font-size:24px' class='fas'>&#xf105;</span>
+        <h3>Cash</h3>
+      </div>
+      <div class="modal-footer">
+        <h3>Modal Footer</h3>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    // var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="/js/rider/riderRideSetup.js"></script>
+</body>
+
+</html>

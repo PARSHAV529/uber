@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/admin/dashboard.css" />
+  <!-- <link rel="stylesheet" href="/css/driver/driverHistory.css" /> -->
+</head>
+
+<body onload="routeCheck()">
+  <div class="container">
+    <!-- Sidebar -->
+
+    <%- include('adminSider')%>
+    <!-- Main Content -->
+    <div class="main-content">
+      <h3>Dashboard</h3>
+
+      <h4>Key Metrics</h4>
+      <div class="key-metrics-container">
+        <div class="key-metrics-card">
+          <div class="avtar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <p>Active Drivers</p>
+          <span id="active-driver-count"></span>
+          <button>View Details</button>
+        </div>
+
+        <div class="key-metrics-card">
+          <div class="avtar">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <p>Total Users</p>
+          <span id="active-users-count"></span>
+          <button>View Details</button>
+        </div>
+
+        <div class="key-metrics-card">
+          <div class="avtar">
+            <i class="fa-solid fa-car"></i>
+          </div>
+          <p>Today's Rides</p>
+          <span id="active-rides-count"></span>
+          <button>View Details</button>
+        </div>
+
+        <div class="key-metrics-card">
+          <div class="avtar">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <p>Today's Revenue</p>
+          <span id="today-revenue-count"></span>
+          <button>View Details</button>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="chart-container">
+      <h4>Statistics</h4>
+
+      <div class="filter">
+
+        <div class="tabs">
+          <a class="active" id="last-week">Last week</a>
+          <a id="last-month">Last month</a>
+          <a id="custom">Custom</a>
+
+        </div>
+        
+
+      </div>
+      <div id="customRangeFormDiv" class="custom-range-form-div">
+
+        <form id="customRangeFrom">
+          <div class="field">
+
+            <label>Start date: </label><input id="startDate" name="start_date" type="date">
+          </div>
+          <div class="field">
+
+            <label>End date: </label><input id="endDate" name="end_date"  type="date">
+          </div>
+          <input type="submit" value="submit">
+        </form>
+      </div>
+
+      <div id="chart-div">
+
+
+        <canvas id="weekChart" style="width:100%;max-width:600px; padding: 20px;"></canvas>
+        <canvas id="monthChart" style="width:100%;max-width:800px; padding: 20px;"></canvas>
+        <canvas id="customChart" style="width:100%;max-width:800px; padding: 20px;"></canvas>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="/js/admin/dashboard.js"></script>
+</body>
+
+</html>

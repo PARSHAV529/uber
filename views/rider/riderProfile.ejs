@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/rider/riderProfile.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="header">
+          <i class="fas fa-bars"></i>
+          <span>Uber</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/uber/rider" id="home">
+                <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li>
+              <a href="/uber/rider/profile" class="active" id="account">
+                <i class="fas fa-user"></i>Account</a>
+            </li>
+            <li>
+              <a href="/uber/rider/security" id="security">
+                <i class="fas fa-lock"></i>Security</a>
+            </li>
+            <li>
+              <a href="/uber/rider/privacy" id="privacy">
+                <i class="fas fa-info-circle"></i>Privacy & Data</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="main">
+        <div class="profile-content">
+          <div class="header"><p>Account Info</p></div>
+          <div id="profile-pic">
+            <div id="profile-header">
+              <img src="/source/bg.jpg" alt="header image" style="height: 80%; width: 150%;">
+            </div>
+            <div id="pfp" style="height: 60%; width: 50%; margin-top: -15%; margin-left: 3%;">
+              <img src="/source/header-image.jpeg" alt="pfp" style="height: inherit; width: inherit; border: 6px solid white; border-radius: 80%;">
+            </div>
+          </div>
+          <div id="content">
+            <form action="/uber/api/rider/update-profile" method="post" id="form"></form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/rider/riderProfile.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+[
+    {
+        "Documents_isApproved":["pending","approved","rejected"],
+        "vehicleDocument":["pending","approved","rejected"],
+        "Driver_document_status":["pending","approved","rejected"],
+        "Payment_status":["success","failed"],
+        "Payment_mode":["cash","UPI"],
+        "Trip_statuus":["active","completed","cancelled"],
+        "Trip_request_status":["requested","accepted","cancelled","notaccepted"]
+    
+    
+    },
+    {"latitude":23.07383706054151, "longitude":72.51418480973638}
+]
+

@@ -1,0 +1,489 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/rider.css" />
+    <style></style>
+  </head>
+
+  <body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="header">
+                <i class="fas fa-bars"></i>
+                <span>Uber Driver</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" id="Home" class="active"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="#" id="Rides"><i class="fas fa-car"></i> Rides</a>
+                    </li>
+                    <li>
+                        <a href="/diverLandingPage" id="Payments"><i class="fas fa-wallet"></i> Driver</a>
+                    </li>
+                    <li><a href="javascript:void(0);" id="About" onclick="toggleDropdown()" aria-expanded="false"><i
+                                class="fas fa-history"></i> About</a>
+
+                        <div class="dropdown" id="aboutDropdown">
+                            <a href=""> About Us</a>
+                            <a href="">Blogs</a>
+                            <a href="">Our Offers</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" id="Settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="profile" id="profile">
+                <img src="https://placehold.co/40x40" alt="User profile picture" />
+                <div>
+                    <!-- rider does not have status -->
+                    <p>John</p>
+                </div>
+            </div>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="#" id="Home" class="active"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li>
+              <a href="#" id="Rides"><i class="fas fa-car"></i> Rides</a>
+            </li>
+            <li>
+              <a href="#" id="Payments"><i class="fas fa-wallet"></i> Driver</a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0);"
+                id="About"
+                onclick="toggleDropdown()"
+                aria-expanded="false"
+                ><i class="fas fa-history"></i> About</a
+              >
+
+              <div class="dropdown" id="aboutDropdown">
+                <a href=""> About Us</a>
+                <a href="">Blogs</a>
+                <a href="">Our Offers</a>
+              </div>
+            </li>
+            <li>
+              <a href="#" id="Settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="profile" id="profile">
+          <img src="https://placehold.co/40x40" alt="User profile picture" />
+          <div>
+            <!-- rider does not have status -->
+            <p>John</p>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="trip">
+          <div class="firsttrip">
+            <h1>
+              Get ready for your <br />
+              first trip
+            </h1>
+            <span
+              >Discover the convenience of Uber. Request a ride now, or <br />
+              schedule one for later directly from your browser.</span
+            >
+
+            <form action="">
+              <table>
+                <tr>
+                  <td>
+                    <div class="input-suggest">
+                      <div>
+                        <input
+                          type="text"
+                          name="pickup"
+                          id="pickup"
+                          placeholder="Pickup Location"
+                        />
+                      </div>
+
+                      <div id="source-suggestions" class="suggestions"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="input-suggest">
+                      <div>
+                        <input
+                          type="text"
+                          name="dropoff"
+                          id="dropoff"
+                          placeholder="Dropoff Location"
+                        />
+                      </div>
+
+                      <div
+                        id="destination-suggestions"
+                        class="suggestions"
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="submit" value="See Prices" id="submit" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div class="map">
+            <img
+              src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_576,w_576/v1683919251/assets/42/a29147-e043-42f9-8544-ecfffe0532e9/original/travel-ilustra.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="maincart">
+          <h1>Book your trip on your phone or computer</h1>
+          <div class="carts">
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026277/assets/26/f3378b-4ecf-4f84-8f06-2cb68e68ac75/original/book-computer.svg"
+                  alt=""
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>1. Add your trip details</h3>
+                <span
+                  >Enter your pickup spot and destination, and <br />check
+                  prices for your trip.</span
+                >
+              </div>
+            </div>
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026377/assets/69/5e3e87-4b90-4c51-817a-51d513c0f759/original/add-payment.svg"
+                  alt=""
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>2. Pay easily</h3>
+                <span
+                  >Add your preferred payment method, then <br />choose among
+                  the ride options available in <br />
+                  your location.</span
+                >
+              </div>
+            </div>
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026420/assets/23/87673a-f189-4f3f-aeb4-90c327a1f293/original/meet-your-driver.svg"
+                  alt=""
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>3. Meet your driver</h3>
+                <span
+                  >Uber will match you with a driver nearby, and <br />you’ll
+                  get updates on your phone or computer <br />about when to meet
+                  them.</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="main-footer">
+          <div class="footer-info">
+            <a href="">Uber</a>
+            <h3>Visit Help Center</h3>
+          </div>
+          <div class="section">
+            <div class="block">
+              <h3>Company</h3>
+              <ul>
+                <li>About us</li>
+                <li>Our offering</li>
+                <li>Newsroom</li>
+                <li>Invester</li>
+                <li>Blog</li>
+                <li>careers</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Products</h3>
+              <ul>
+                <li>Ride</li>
+                <li>Drive</li>
+                <li>Delivery</li>
+                <li>Eat</li>
+                <li>Uber for bussiness</li>
+                <li>Uber freight</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Global citizenship</h3>
+              <ul>
+                <li>Safety</li>
+                <li>Sustainability</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Travel</h3>
+              <ul>
+                <li>Reserve</li>
+                <li>Airports</li>
+                <li>Cities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      function toggleDropdown() {
+        const dropdown = document.getElementById("aboutDropdown");
+        const toggleLink = document.querySelector("#About");
+        dropdown.classList.toggle("show");
+        toggleLink.setAttribute(
+          "aria-expanded",
+          dropdown.classList.contains("show")
+        );
+      }
+
+      window.onclick = function (event) {
+        if (!event.target.matches("#About")) {
+          const dropdowns = document.getElementsByClassName("dropdown");
+          for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+              const toggleLink = document.querySelector("#About");
+              toggleLink.setAttribute("aria-expanded", "false");
+            }
+          }
+        }
+      };
+
+      document.getElementById("submit").addEventListener("click", (e) => {
+        e.preventDefault();
+        let startLocation = document.getElementById("pickup").value;
+        let destinationLocation = document.getElementById("dropoff").value;
+        console.log(startLocation, destinationLocation);
+
+        window.location.href = `uber/rider/go?start=${startLocation}&dest=${destinationLocation}`;
+      });
+
+      document.getElementById("profile").addEventListener("click", function () {
+        window.location.href = "/uber/rider/profile";
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const pickupInput = document.getElementById("pickup");
+        const dropoffInput = document.getElementById("dropoff");
+        const sourceSuggestions = document.getElementById("source-suggestions");
+        const destSuggestions = document.getElementById(
+          "destination-suggestions"
+        );
+        let debounceTimer;
+
+        function setupAutocomplete(input, suggestionsDiv, isSource = false) {
+          input.addEventListener("click", function () {
+            if (
+              isSource &&
+              (!suggestionsDiv.style.display ||
+                suggestionsDiv.style.display === "none")
+            ) {
+              showCurrentLocationOption(input, suggestionsDiv);
+            }
+          });
+
+          input.addEventListener("input", function () {
+            clearTimeout(debounceTimer);
+            suggestionsDiv.style.display = "none";
+            debounceTimer = setTimeout(async () => {
+              const query = input.value;
+              if (query.length > 0) {
+                try {
+                  const response = await fetch(
+                    `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(
+                      query
+                    )}&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`
+                  );
+                  const data = await response.json();
+                  if (data.status === "ok" && data.predictions.length > 0) {
+                    displaySuggestions(
+                      input,
+                      suggestionsDiv,
+                      data.predictions,
+                      isSource
+                    );
+                  } else if (isSource) {
+                    showCurrentLocationOption(input, suggestionsDiv);
+                  }
+                } catch (error) {
+                  console.error("Autocomplete error:", error);
+                  if (isSource)
+                    showCurrentLocationOption(input, suggestionsDiv);
+                }
+              } else if (isSource) {
+                showCurrentLocationOption(input, suggestionsDiv);
+              }
+            }, 300);
+          });
+
+          document.addEventListener("click", function (e) {
+            if (!suggestionsDiv.contains(e.target) && e.target !== input) {
+              suggestionsDiv.style.display = "none";
+            }
+          });
+        }
+
+        function showCurrentLocationOption(input, suggestionsDiv) {
+          suggestionsDiv.innerHTML = "";
+          const currentLocationItem = document.createElement("div");
+          currentLocationItem.className = "suggestion-item";
+          currentLocationItem.innerHTML =
+            '<i class="fa-solid fa-location-crosshairs"></i> Current Location';
+
+          currentLocationItem.addEventListener("click", async () => {
+            if (navigator.geolocation) {
+              // Replace text with loader while fetching
+              currentLocationItem.innerHTML =
+                '<div class="suggestion-loader"></div> Fetching Location...';
+              currentLocationItem.style.pointerEvents = "none"; 
+
+              navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                  const lat = position.coords.latitude;
+                  const lng = position.coords.longitude;
+                  try {
+                    const response = await fetch(
+                      `https://api.olamaps.io/places/v1/reverse-geocode?latlng=${lat},${lng}&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`
+                    );
+                    const data = await response.json();
+                    if (data.status === "ok" && data.results.length > 0) {
+                      input.value = data.results[0].formatted_address;
+                      suggestionsDiv.innerHTML = ''
+                    } else {
+                      input.value = "Current Location";
+                    }
+                  } catch (error) {
+                    console.error("Reverse geocoding error:", error);
+                    input.value = "Current Location";
+                  }
+                },
+                (error) => {
+                  console.error("Geolocation error:", error);
+                  alert("Unable to retrieve current location");
+                  suggestionsDiv.style.display = "none";
+                  currentLocationItem.innerHTML =
+                    '<i class="fa-solid fa-location-crosshairs"></i> Current Location';
+                  currentLocationItem.style.pointerEvents = "auto";
+                }
+              );
+            } else {
+              alert("Geolocation is not supported by this browser");
+              suggestionsDiv.style.display = "none";
+            }
+          });
+          suggestionsDiv.appendChild(currentLocationItem);
+          suggestionsDiv.style.display = "block";
+        }
+
+        function displaySuggestions(
+          input,
+          suggestionsDiv,
+          predictions,
+          isSource
+        ) {
+          suggestionsDiv.innerHTML = "";
+          if (isSource) {
+            const currentLocationItem = document.createElement("div");
+            currentLocationItem.className = "suggestion-item";
+            currentLocationItem.innerHTML =
+              '<i class="fa-solid fa-location-crosshairs"></i> Current Location';
+
+            currentLocationItem.addEventListener("click", async () => {
+              if (navigator.geolocation) {
+                // Show loader while fetching
+                currentLocationItem.innerHTML =
+                  '<div class="suggestion-loader"></div> Fetching Location...';
+                currentLocationItem.style.pointerEvents = "none";
+
+                navigator.geolocation.getCurrentPosition(
+                  async (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    try {
+                      const response = await fetch(
+                        `https://api.olamaps.io/places/v1/reverse-geocode?latlng=${lat},${lng}&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`
+                      );
+                      const data = await response.json();
+                      if (data.status === "ok" && data.results.length > 0) {
+                        input.value = data.results[0].formatted_address;
+                      } else {
+                        input.value = "Current Location";
+                      }
+                    } catch (error) {
+                      console.error("Reverse geocoding error:", error);
+                      input.value = "Current Location";
+                    }
+                  },
+                  (error) => {
+                    console.error("Geolocation error:", error);
+                    alert("Unable to retrieve current location");
+                    suggestionsDiv.style.display = "none";
+                    currentLocationItem.innerHTML =
+                      '<i class="fa-solid fa-location-crosshairs"></i> Current Location';
+                    currentLocationItem.style.pointerEvents = "auto";
+                  }
+                );
+              } else {
+                alert("Geolocation is not supported by this browser");
+                suggestionsDiv.style.display = "none";
+              }
+            });
+            suggestionsDiv.appendChild(currentLocationItem);
+          }
+
+          predictions.forEach((prediction) => {
+            const item = document.createElement("div");
+            item.className = "suggestion-item";
+            item.textContent = prediction.description;
+            item.addEventListener("click", () => {
+              input.value = prediction.description;
+              suggestionsDiv.style.display = "none";
+            });
+            suggestionsDiv.appendChild(item);
+          });
+          suggestionsDiv.style.display = "block";
+        }
+
+        setupAutocomplete(pickupInput, sourceSuggestions, true);
+        setupAutocomplete(dropoffInput, destSuggestions, false);
+      });
+    </script>
+  </body>
+</html>

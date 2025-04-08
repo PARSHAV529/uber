@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rides</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+  <link rel="stylesheet" href="/css/driver/driverHistory.css">
+  <link rel="stylesheet" href="/css/driver/driverRideRequest.css">
+</head>
+<body>
+    <div id="blur-background"></div>
+    <div class="container">
+        <%- include('../includes/driverSidebar.ejs') %>
+        <div class="ride-body">
+            <div class="ride-management">
+                <h2>Ride Management</h2>
+                <ul>
+                    <li class="active lists" id="available-ride" >Available Rides</li>
+                    <li class="lists" id="upcoming-ride">Upcoming</li>
+                    <li class="lists" id="scheduled-ride">Scheduled</li>
+                </ul>
+                <div class="sub-box">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pop-up-box">
+        <div class="cross-btn">
+            <div class="trip-heading">
+                <h2>Trip Details</h2>
+            </div>
+            <!-- <img id="close-popup" src="/source/close.png" alt=""> -->
+            <!-- <i id="close-popup" class="fa fa-times"></i> -->
+            <i id="close-popup" class="fa fa-times-circle"></i>
+        </div>
+        <div class="ride-request-details">
+            <p><span>Passenger name</span><span>:</span><span class="passenger-name">Tushar Vaghela</span></p>
+            <p><span>From</span><span>:</span><span class="from">Talaja</span></p>
+            <p><span>To</span><span>:</span><span class="to">Bhavnagar</span></p>
+            <p><span>Distance</span><span>:</span><span class="req-ride-distance">55 KM</span></p>
+            <p><span>Fare</span><span>:</span><span class="fare">100</span></p>
+        </div>
+        <div class="request-ride-btns">
+            <button class="accept">Accept</button>
+            <button class="decline">Decline</button>
+        </div>
+    </div>
+    <script src="/js/driver/driverRideRequest.js"></script>
+</body>
+</html>

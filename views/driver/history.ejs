@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <%- include('../includes/driverSidebar.ejs') %>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <h1>Ride History</h1>
+        <div class="tabs">
+          <a href="#" class="active" id="all-rides">All Rides</a>
+          <a href="#" id="completed">Completed</a>
+          <a href="#" id="canceled">Cancelled</a>
+        </div>
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search by date, location or ride ID"
+          />
+        </div>
+
+        <div id="ride-detail"></div>
+        <div class="recent-rides" id="recent-rides"></div>
+        <div class="monthly-summary">
+          <h2>Monthly Summary</h2>
+          <div class="summary-cards">
+            <div class="summary-card">
+              <i class="fas fa-car"></i>
+              <h3>Total Rides</h3>
+              <p>42 rides this month</p>
+              <button>View Details</button>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-wallet"></i>
+              <h3>Total Earnings</h3>
+              <p>$875.50 this month</p>
+              <button>View Breakdown</button>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-clock"></i>
+              <h3>Driving Hours</h3>
+              <p>68 hours this month</p>
+              <button>View Schedule</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/driver/driverHistory.js"></script>
+  </body>
+</html>

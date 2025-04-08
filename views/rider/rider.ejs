@@ -1,0 +1,154 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ride History</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="/css/rider.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <%- include('riderSidebar')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="trip">
+          <div class="firsttrip">
+            <h1>Get ready for your <br> first trip</h1>
+            <span>Discover the convenience of Uber. Request a ride now, or <br>
+              schedule one for later directly from your browser.</span>
+
+            <form action="">
+              <table>
+                <tr>
+                  <td>
+                    <input type="text" name="pickup" id="pickup" placeholder="Pickup Location">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" name="dropoff" id="dropoff" placeholder="Dropoff Location">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" value="See Prices" id="submit">
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div class="map">
+            <img
+              src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_576,w_576/v1683919251/assets/42/a29147-e043-42f9-8544-ecfffe0532e9/original/travel-ilustra.png"
+              alt="">
+          </div>
+        </div>
+        <div class="history">
+          <table id="history-container"></table>
+        </div>
+        <div class="maincart">
+          <h1>Book your trip on your phone or computer</h1>
+          <div class="carts">
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026277/assets/26/f3378b-4ecf-4f84-8f06-2cb68e68ac75/original/book-computer.svg"
+                  alt="">
+              </div>
+              <div class="cartinfo">
+                <h3>1. Add your trip details</h3>
+                <span>Enter your pickup spot and destination, and <br>check prices for your trip.</span>
+              </div>
+            </div>
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026377/assets/69/5e3e87-4b90-4c51-817a-51d513c0f759/original/add-payment.svg"
+                  alt="">
+              </div>
+              <div class="cartinfo">
+                <h3>2. Pay easily</h3>
+                <span>Add your preferred payment method, then <br>choose among the ride options available in
+                  <br> your location.</span>
+              </div>
+            </div>
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_960,w_768/v1734026420/assets/23/87673a-f189-4f3f-aeb4-90c327a1f293/original/meet-your-driver.svg"
+                  alt="">
+              </div>
+              <div class="cartinfo">
+                <h3>3. Meet your driver</h3>
+                <span>Uber will match you with a driver nearby, and <br>you’ll get updates on your phone or
+                  computer <br>about when to meet them.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="main-footer">
+          <div class="footer-info">
+            <a href="">Uber</a>
+            <h3>Visit Help Center</h3>
+          </div>
+          <div class="section">
+            <div class="block">
+              <h3>Company</h3>
+              <ul>
+                <li>About us</li>
+                <li>Our offering</li>
+                <li>Newsroom</li>
+                <li>Invester</li>
+                <li>Blog</li>
+                <li>careers</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Products</h3>
+              <ul>
+                <li>Ride</li>
+                <li>Drive</li>
+                <li>Delivery</li>
+                <li>Eat</li>
+                <li>Uber for bussiness</li>
+                <li>Uber freight</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Global citizenship</h3>
+              <ul>
+                <li>Safety</li>
+                <li>Sustainability</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Travel</h3>
+              <ul>
+                <li>Reserve</li>
+                <li>Airports</li>
+                <li>Cities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      
+
+  </div>
+  <script>
+    document.cookie = "user_role=rider; path=/";
+  </script>
+  <script src="/js/rider/rider.js"></script>
+</body>
+
+</html>

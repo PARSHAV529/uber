@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+  </head>
+
+  <body onload="routeCheck()">
+    <div class="container">
+      <!-- Sidebar -->
+
+      <%- include('adminSider')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <h3>Reports</h3>
+
+        <h4>Payment Overview</h4>
+        <div class="key-metrics-container">
+          <div class="key-metrics-card">
+            <div class="avtar"><i class="fa-solid fa-money-bill"></i></div>
+            <p>Total Revenue</p>
+            <span id="total-revenue"></span>
+            <button>View Details</button>
+          </div>
+          <div class="key-metrics-card">
+            <div class="avtar">
+              <i class="fa fa-exchange" aria-hidden="true"></i>
+            </div>
+            <p>Total Transactions</p>
+            <span id="total-transactions-count"></span>
+            <button>View Details</button>
+          </div>
+
+          <div class="key-metrics-card">
+            <div class="avtar">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <p>Failed Transactions</p>
+            <span id="total-failed-transactions-count"></span>
+            <button>View Details</button>
+          </div>
+
+          <!-- <div class="key-metrics-card">
+          <div class="avtar">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <p>Today's Revenue</p>
+          <span id="today-revenue-count"></span>
+          <button>View Details</button>
+        </div> -->
+        </div>
+
+        <h4>Performance Overview</h4>
+
+        <!-- <div class="serch-driver-request-pagination">
+        <div class="search">
+          <input type="text" class="search-input" id="search-input" placeholder="search driver request by his name" />
+          <div class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+        <div class="pagination">
+          <button>
+            << </button>
+            <button>
+              
+              < </button>
+              <button>1</button>
+              <button>></button>
+              <button>>></button>
+            </div>
+          </div> -->
+
+        <h4 style="margin: 20px 0 0">Top rated drivers</h4>
+        <div
+          class="performance-overview-container"
+          id="top-rated-drivers-container"
+        >
+          <!-- <div id="top-rated-drivers" class="top-rated-drivers">
+          <span class="driver-name">Name</span>
+          <span class="activity-status">Rating</span>
+          <span class="activity-status">Completed Rides</span>
+          <span class="activity-status">Earning</span>
+        </div> -->
+        </div>
+        <hr style="border: 1px solid #ddd" />
+
+        <h4 style="margin: 10px 0">Drivers with most rides</h4>
+        <div
+          class="performance-overview-container"
+          id="most-completed-rides-drivers-container"
+        ></div>
+        <hr style="border: 1px solid #ddd" />
+
+        <h4 style="margin: 10px 0">Low rated drivers</h4>
+        <div
+          class="performance-overview-container"
+          id="low-rated-drivers-container"
+        ></div>
+      </div>
+    </div>
+
+    <!-- <script src="/js/admin/dashboard.js"></script> -->
+    <script src="/js/admin/reports.js"></script>
+  </body>
+</html>

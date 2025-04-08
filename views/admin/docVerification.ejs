@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Driver Document Verification</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/admin/docVerificaion.css" />
+  </head>
+
+  <body onload="routeCheck()">
+    <div class="container">
+      <!-- Sidebar -->
+      <%- include('adminSider')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <h3>
+          Documents &nbsp; &gt; &nbsp; Verification
+        </h3>
+
+        <h4>Driver's Documents</h4>
+
+        <div class="document-list-container" id="document-list-container">
+        </div>
+
+        <h4>Vehicle Documents</h4>
+
+        <div class="vehicle-document-list-container">
+          <div class="driver-doc-list" id="PUC-div">
+            <div class="driver-info">
+            <i class="fa-solid fa-car-side"></i>
+            <img id="driver-avtar">      
+            <span class="driver-name" id="driver-name"></span>
+            </div>
+            <span class="doc-type">PUC</span>
+            <span class="doc-status" id="doc-status"></span>
+            <span class="submission-date" id="submission-date"></span>
+            <button class="view-doc" id="view-puc">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="driver-doc-list" id="RCBook-div">
+            <div class="driver-info">
+            <i class="fa-solid fa-car-side"></i>
+            <img id="driver-avtar">
+            <span class="driver-name" id="driver-name"></span>
+            </div>
+            <span class="doc-type">RC Book</span>
+            <span class="doc-status" id="doc-status"></span>
+            <span class="submission-date" id="submission-date"></span>
+            <button class="view-doc" id="view-rcbook">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="driver-doc-list" id="insurance-div">
+            <div class="driver-info" id="driver-avtar">
+            <i class="fa-solid fa-car-side"></i>
+            <img id="driver-avtar">
+            <span class="driver-name" id="driver-name"></span>
+            </div>
+            <span class="doc-type">Insurance</span>
+            <span class="doc-status" id="doc-status"></span>
+            <span class="submission-date" id="submission-date"></span>
+            <button class="view-doc" id="view-insurance">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="vehicle-btns">
+            <button class="vehicle-accept" id="vehicle-accept">Accept Vehicle</button>
+            <button class="vehicle-reject" id="vehicle-reject">Reject Vehicle</button>
+            <input type="text" placeholder="please enter reason for rejection of vehicle" id="vehicle-reject-input" class="doc-reject-input"/>
+          </div>
+
+          <div class="driver-btns">
+            <button class="driver-accept" id="driver-accept">Driver Approval</button>
+          </div>
+        </div>
+
+    <!-- driver document modal -->
+    <div id="documentModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="model-doc-name">Document name</h2>
+        <div class="modal-image-container">
+            <embed id="modalImage" src="" alt="Document Image" />
+        </div>
+        <input type="text" placeholder="please enter reason for rejection" id="doc-reject-input" class="doc-reject-input"/>
+        <div id="modal-btns-div" class="modal-buttons">
+          <!-- <button id="modal-reject-btn"  class="modal-reject-btn">Reject</button>
+          <button id="modal-accept-btn" class="modal-accept-btn">Accept</button> -->
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/admin/docVerification.js"></script>
+  </body>
+</html>

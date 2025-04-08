@@ -1,0 +1,87 @@
+*{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    color: black;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+body .nav{
+    background-color: black;
+    color: white;
+    height: 75px;
+    align-content: center;
+    padding-left: 25px;
+}
+
+body .nav img{
+    background-color: black;
+    width: 60px;
+}
+
+body #main{
+    width: 100%;
+    height: calc(100vh - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+body #main .box{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    gap: 20px;
+}
+
+body #main .box #inputBox{
+    display: flex;
+}
+
+body #main .box button{
+    align-content: center;
+    box-sizing: border-box;
+    border: solid 1px black;
+    cursor : pointer;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    border-radius: 10px;
+}
+
+body #main .box #inputBox input{
+    padding: 10px;
+    font-size: 24px;
+    height: calc(40px - 20px);
+    width: calc(150px - 20px);
+    border: 1px solid black;
+    text-align: center;
+    outline: none;
+    pointer-events: none;
+}
+
+body #main .box #inputBox input:nth-child(1){
+    cursor: pointer;
+    pointer-events: all;
+}
+
+body #main .box #inputBox input:first-child{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+body #main .box #inputBox input:last-child{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

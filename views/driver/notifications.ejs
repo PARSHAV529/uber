@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>notifications</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+    <link rel="stylesheet" href="/css/driver/driverNotifications.css" />
+
+    <script src="/js/driver/notifications.js"></script>
+  </head>
+  <body onload="getNotificationData()">
+    <div class="container">
+      <%- include('../includes/driverSidebar.ejs') %>
+      <div class="notification-content">
+        <h1>Your Notifications</h1>
+        <div class="notifications" id="notifications1">
+          <!-- <div class="notification-details"></div> -->
+        </div>
+      </div>
+    </div>
+    <div id="popupBackground" class="popupBackground">
+      <div id="main" class="main"></div>
+    </div>
+  </body>
+</html>
+

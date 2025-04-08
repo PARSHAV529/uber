@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payments</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    /> -->
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+    <link rel="stylesheet" href="/css/driver/driverPayment.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../includes/driverSidebar.ejs') %>
+      <div id="otherContent">
+        <div id="section1">
+          <div id="heading">
+            <h2>Payments</h2>
+          </div>
+          <div id="payments_box">
+            <div id="current_balance">
+              <i class="fa-solid fa-wallet"></i>
+              <h3>Current Balance</h3>
+              <h2 id="current_balance_amount">
+                <i class="fa-solid fa-indian-rupee-sign"></i>842
+              </h2>
+              <button id="cash_out">Cash out</button>
+            </div>
+            <div id="current_balance">
+              <i class="fa-solid fa-calendar"></i>
+              <h3>Next Payout</h3>
+              <p><i class="fa-solid fa-indian-rupee-sign"></i>842 on Monday</p>
+              <button id="cash_out">view schedule</button>
+            </div>
+            <div id="current_balance">
+              <i class="fa-solid fa-credit-card"></i>
+              <h3>Payment Method</h3>
+              <p>Bank of India ****4567</p>
+              <button id="cash_out">Change</button>
+            </div>
+          </div>
+        </div>
+        <div id="section2">
+          <div id="heading">
+            <h2>Earnings Breakdown</h2>
+          </div>
+          <div id="tabs">
+            <h4 id="This_Week" class="active tabs">This Week</h4>
+            <h4 id="Last_Week" class="tabs">Last Week</h4>
+            <h4 id="This_Month" class="tabs">This Month</h4>
+            <h4 id="Last_Month" class="tabs">Last Month</h4>
+          </div>
+          <div id="payments_box">
+            <div id="current_balance">
+              <i class="fa-solid fa-car"></i>
+              <h3>Ride Earnings</h3>
+              <h2 id="driver_earnings">
+                <i class="fa-solid fa-indian-rupee-sign"></i>-
+              </h2>
+            </div>
+          </div>
+          <div id="payments_box">
+            <div class="dates">
+              <label for="start_date">start date</label>
+              <input type="date" id="start_date">
+            </div>  
+             <div class="dates">
+              <label for="end_date">end date</label>
+              <input type="date" id="end_date">
+            </div>  
+               <div class="dates">
+              <label for="groupby">Part By</label>
+             <select name="groupby" id="groupby">
+              <option value="day">day</option>
+              <option value="week">week</option>
+              <option value="month">month</option>
+              <option value="year">year</option>
+             </select>
+            </div> 
+            <div class="dates">
+         
+              <button type="button" id="submit_dates">sumbit</button>
+            </div>
+            
+          </div>
+
+         
+        </div>
+        <canvas id="myChart" style="width: 100%; max-width: 700px"></canvas>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    
+    <script src="/js/driver/driverPayment.js"></script>
+  </body>
+</html>

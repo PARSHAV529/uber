@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/uploadDocument.css" />
+    <!-- <link rel="stylesheet" href="/css/driverHistory.css" /> -->
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="popupbox displaynone" id="pop">
+      <!-- <dialog> -->
+      <div class="popupbox-content">
+        <div class="popupbox-header">
+          <h2 id="popupbox-header"> Document</h2>
+          <button
+            class="close"
+            onclick="javascript:document.getElementById('pop').classList.add('displaynone'); document.getElementById('main').classList.remove('blurEffect')"
+          >
+            X
+          </button>
+        </div>
+        <div class="image_preview" id="image_preview">
+          <img
+            src="https://sgtbkhalsadu.ac.in/assets/front/images/dummy.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="popupbox-body">
+          <label class="custom-file-upload">
+            <input type="file" name="document" id="document" class="file" />
+            <i class="fa-solid fa-paperclip"></i> attach
+          </label>
+
+          <button type="submit" class="btn btn-primary upload" id="upload">
+            upload
+          </button>
+        </div>
+      </div>
+      <!-- </dialog> -->
+    </div> 
+    <div class="popupbox displaynone" id="popupRC">
+      <!-- <dialog> -->
+      <div class="popupbox-content-rc">
+        <div class="popupbox-header">
+          <h2 id="popupbox-header"> Document</h2>
+          <button
+            class="close"
+            onclick="javascript:document.getElementById('popupRC').classList.add('displaynone'); document.getElementById('main').classList.remove('blurEffect')"
+          >
+            X
+          </button>
+        </div>
+        <div class="image_preview" id="image_preview_rc">
+          <img
+          id="RC_BOOK"
+            src="https://sgtbkhalsadu.ac.in/assets/front/images/dummy.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="popupbox-body">
+          <label class="custom-file-upload">
+            <input type="file" name="document_vehical" id="popRc" class="file" />
+            <i class="fa-solid fa-paperclip"></i> attach
+          </label>
+
+        
+        </div>
+      </div>
+      <!-- </dialog> -->
+    </div>
+      <div class="popupbox displaynone" id="popupPUC">
+      <!-- <dialog> -->
+      <div class="popupbox-content-puc">
+        <div class="popupbox-header">
+          <h2 id="popupbox-header"> Document</h2>
+          <button
+            class="close"
+            onclick="javascript:document.getElementById('popupPUC').classList.add('displaynone'); document.getElementById('main').classList.remove('blurEffect')"
+          >
+            X
+          </button>
+        </div>
+        <div class="image_preview" id="image_preview_puc">
+          <img
+          id="PUC"
+            src="https://sgtbkhalsadu.ac.in/assets/front/images/dummy.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="popupbox-body">
+          <label class="custom-file-upload">
+            <input type="file" name="document_vehical" id="popPUC" class="file" />
+            <i class="fa-solid fa-paperclip"></i> attach
+          </label>
+
+        
+        </div>
+      </div>
+      <!-- </dialog> -->
+    </div> 
+    <div class="popupbox displaynone" id="popupInsurance">
+      <!-- <dialog> -->
+      <div class="popupbox-content-Insurance">
+        <div class="popupbox-header">
+          <h2 id="popupbox-header"> Document</h2>
+          <button
+            class="close"
+            onclick="javascript:document.getElementById('popupInsurance').classList.add('displaynone'); document.getElementById('main').classList.remove('blurEffect')"
+          >
+            X
+          </button>
+        </div>
+        <div class="image_preview" id="image_preview_Insurance">
+          <img
+          id="Insurance"
+            src="https://sgtbkhalsadu.ac.in/assets/front/images/dummy.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="popupbox-body">
+          <label class="custom-file-upload">
+            <input type="file" name="document_vehical" id="popInsurance" class="file" />
+            <i class="fa-solid fa-paperclip"></i> attach
+          </label>
+
+        
+        </div>
+      </div>
+      <!-- </dialog> -->
+    </div>
+    <div id="innerHTMLVehicalDocument" class="innerHTMLVehicalDocument displaynone">
+      <div class="popupbox-header">
+        <h2 id="popupbox-header">Upload Document</h2>
+        <button
+          class="close"
+          onclick="javascript:document.getElementById('innerHTMLVehicalDocument').style.display='none'; document.getElementById('main').classList.remove('blurEffect')"
+        >
+          X
+        </button>
+      </div>
+      <form id="VehicleDataForm" action="#">
+    
+        <div class="inputFildesRow">
+          <div class="inputFildes">
+            <label for="type_post">type</label>
+            <select name="type" id="type_popup">
+              <option value="bike">bike</option>
+              <option value="rixa">rixa</option>
+              <option value="car">car</option>
+            </select>
+          </div>
+          <div class="inputFildes">
+            <label for="colour_post">colour</label>
+            <input type="text" name="colour" id="colour_popup" />
+          </div>
+        </div>
+
+        <div class="inputFildesRow">
+          <div class="inputFildes">
+            <label for="Number_plate_post">Number_plate</label>
+            <input type="text" name="Number_plate" id="Number_plate_popup" />
+          </div>
+          <div class="inputFildes">
+            <label for="PUC_Exp_date_post">PUC_Exp_date</label>
+            <input type="text" name="PUC_Exp_date" id="PUC_Exp_date_popup" />
+          </div>
+          <div class="inputFildes">
+            <label for="insurance_Exp_date_post">insurance_Exp_date</label>
+            <input
+              type="text"
+              name="insurance_Exp_date"
+              id="insurance_Exp_date_popup"
+            />
+          </div>
+        </div>
+        <div class="inputFildesRow">
+          <div class="inputFildes">
+            <label for="RC_BOOk" class="custom-file-upload-Vehical"
+              >RC_BOOk
+              <input type="file" name="document_vehical" id="RC_BOOk" />
+            </label>
+          </div>
+          <div class="inputFildes">
+            <label for="Insurance" class="custom-file-upload-Vehical"
+              >Insurance
+              <input type="file" name="document_vehical" id="Insurance"
+            /></label>
+          </div>
+          <div class="inputFildes">
+            <label for="PUC" class="custom-file-upload-Vehical"
+              >PUC <input type="file" name="document_vehical" id="PUC"
+            /></label>
+          </div>
+        </div>
+
+        <!-- <button type="submit" id="submit_btn"> Submit</button> -->
+      </form>
+    </div>
+   
+    <div class="main" id="main">
+      <%# include('../includes/driverSidebar.ejs') %>
+      <div class="navbar">
+        <div id="back-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+        <img src="source/Uber_logo.png" alt="Uber Logo" />
+      </div>
+      <div class="otherContent">
+        <h1>Driver Requirements</h1>
+        <div id="innerHTMLDocument"></div>
+        <h1>Vehicle Details</h1>
+        <div id="innerHTMLDocumentvehical">
+          <form id="VehicleDataForm_post" action="#">
+    
+            <div class="inputFildesRow">
+              <div class="inputFildes">
+                <label for="type">type</label>
+                <select name="type" id="type">
+                  <option value="bike">bike</option>
+                  <option value="rixa">rixa</option>
+                  <option value="car">car</option>
+                </select>
+              </div>
+              <div class="inputFildes">
+                <label for="colour">colour</label>
+                <input type="text" name="colour" id="colour" />
+              </div>
+            </div>
+    
+            <div class="inputFildesRow">
+              <div class="inputFildes">
+                <label for="Number_plate">Number_plate</label>
+                <input type="text" name="Number_plate" id="Number_plate" />
+              </div>
+              <div class="inputFildes">
+                <label for="PUC_Exp_date">PUC_Exp_date</label>
+                <input type="text" name="PUC_Exp_date" id="PUC_Exp_date" />
+              </div>
+              <div class="inputFildes">
+                <label for="insurance_Exp_date">insurance_Exp_date</label>
+                <input
+                  type="text"
+                  name="insurance_Exp_date"
+                  id="insurance_Exp_date"
+                />
+              </div>
+            </div>
+            <div class="inputFildesRowImage">
+              <div class="inputFildesImage" id="RC_BOOk_image">
+                <div class="document_card_vehical">
+                  <p>RC BOOK</p>
+                  <i class="fa-solid fa-circle-right openpopup" id="vehical_RC-BOOK"></i>
+                </div>
+                <!-- <label for="RC_BOOk"  class="custom-file-upload"
+                  >RC_BOOk
+                  <input type="file" name="document_vehical" id="RC_BOOk" />
+                </label> -->
+                <!-- <embed src="http://res.cloudinary.com/dl0uptvec/image/upload/v1743499385/nmreu8z7zvehta6ag6a0.pdf" type="" id="RC_BOOk_image"> -->
+              </div>
+              <div class="inputFildesImage" id="puc_image">
+                <div class="document_card_vehical">
+                  <p>PUC</p>
+                  <i class="fa-solid fa-circle-right openpopup" id="vehical_puc"></i>
+                </div>
+                <!-- <label for="Insurance" class="custom-file-upload"
+                  >Insurance
+                  <input type="file" name="document_vehical" id="Insurance"
+                /></label> -->
+               
+              </div>
+              <div class="inputFildesImage" id="Insurance_image">
+                <div class="document_card_vehical">
+                  <p>Insurance</p>
+                  <i class="fa-solid fa-circle-right openpopup" id="vehical_Insurance"></i>
+                </div>
+                <!-- <label for="PUC" class="custom-file-upload"
+                  >PUC <input type="file" name="document_vehical" id="PUC"
+                /></label> -->
+             
+              </div>
+            </div>
+
+            <button type="button" id="submit_btn">Submit</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="/js/uploadDocument.js"></script>
+  </body>
+</html>

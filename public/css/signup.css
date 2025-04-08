@@ -1,0 +1,241 @@
+*{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+body .nav{
+    background-color: black;
+    color: white;
+    height: 75px;
+    align-content: center;
+    padding-left: 25px;
+}
+
+body .nav img{
+    background-color: black;
+    width: 60px;
+}
+
+body #main{
+    width: 100%;
+    height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+
+body #main .box{
+    top: 100px;
+    position: relative;
+    width: calc(40% - 42px);
+    height: 60%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+body #main .box .header-box{
+    padding: 20px;
+    width: calc(100% - 40px);
+    background-color: white;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+body #main .box .header-box p{
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+body #main .box .content-box{
+    padding: 20px;
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+body #main .box input{
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(172, 171, 171);
+    width: calc(80% - 20px);
+    padding: 5px 10px;
+    height: 30px;
+    border-radius: 10px;
+    outline: black;
+    font-size: 16px;
+}
+
+body #main .box button{
+    width: 80%;
+    align-content: center;
+    box-sizing: border-box;
+    border: solid 1px black;
+    cursor : pointer;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    border-radius: 10px;
+}
+
+body #main .box h4{
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid rgb(172, 171, 171);
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: 100px;
+    display: flex;
+}
+
+body #main .box h4:hover{
+    background-color: rgb(172, 171, 171);
+}
+
+body #main .box h4 img{
+    background-color: transparent;
+    width: 24px;
+}
+
+body #main .box a{
+    display: block;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+body #main .box a:hover{
+    text-decoration: underline;
+    color: rgb(0, 0, 105);
+}
+
+/* CREATE PROFILE */
+
+#main-box{
+    width: 50%;
+    height: calc(75vh - 75px);
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#main-box .profile-h2{
+    width: 80%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#main-box form{
+    border-radius: 10px;
+    width: calc(80% - 60px);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+#main-box form .profile-input1,#main-box form .profile-input2,#main-box form .profile-input3{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#main-box form .profile-input1 input{
+    padding: 5px 10px;
+    width: calc(50% - 10px);
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(172, 171, 171);
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#main-box form .profile-input2 input{
+    padding: 5px 10px;
+    width: 100%;
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(172, 171, 171);
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#main-box form .profile-input3{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(172, 171, 171);
+}
+
+#main-box form .profile-input3 input{
+    background-color: rgb(238, 238, 238);
+    padding: 5px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 10px;
+    
+}
+
+#main-box form .profile-input3 img{
+    align-content: center;
+    background-color: rgb(238, 238, 238);
+    width: 18px;
+    height: 18px;
+    padding-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+#main-box button{
+    align-content: center;
+    box-sizing: border-box;
+    border: solid 1px black;
+    cursor : pointer;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    border-radius: 10px;
+}

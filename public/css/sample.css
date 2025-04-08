@@ -1,0 +1,130 @@
+body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main .navbar {
+    height: 80px;
+    background: #000;
+    position: sticky;
+    top: 0;
+  }
+  
+  .main .navbar img {
+    height: 30px;
+    margin: 25px;
+  }
+  
+  h2 {
+    font-family: -apple-system, BlinkMacSystemFont, "SegoeUI", Roboto, Helvetica,
+      Arial, sans-serif, "AppleColorEmoji", "SegoeUIEmoji", "SegoeUISymbol";
+  }
+  
+  .main .login-box {
+    width: 20%;
+    margin: 5%;
+  }
+  
+  .main .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 5%;
+    color: #585858;
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #696969;
+  }
+  
+  .separator:not(:empty)::before {
+    margin-right: 0.25em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: 0.25em;
+  }
+  
+  fieldset {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 350px;
+  }
+  
+  .pwd {
+    display: flex;
+  }
+  
+  .pwd img {
+    margin: 6% 0 6% 3%;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    background: #eeeeee;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  input::placeholder {
+    font-size: 15px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #3e3d3d;
+    float: right;
+  }
+  
+  input[type="button"] {
+    color: #ffffff;
+    background-color: #000000;
+    border: none;
+    margin-top: 2%;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .dummyDiv {
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    background-color: #e8e8e8;
+    border: none;
+    margin-top: 5%;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    font-family: -apple-system, BlinkMacSystemFont, "SegoeUI", Roboto, Helvetica,
+      Arial, sans-serif, "AppleColorEmoji", "SegoeUIEmoji", "SegoeUISymbol";
+  }
+  
+  svg {
+    margin-right: 2%;
+  }
+  
+  p {
+    font-size: 15px;
+    color: #585858;
+  }  

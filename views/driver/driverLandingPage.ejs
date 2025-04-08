@@ -1,0 +1,328 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/driver/driverLandingPage.css" />
+    <style></style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="header">
+          <i class="fas fa-bars"></i>
+          <span>Uber Driver</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/" id="Home" class="active"
+                ><i class="fas fa-home"></i> Home</a
+              >
+            </li>
+            <li>
+              <a href="#" id="Rides"><i class="fas fa-car"></i> Rides</a>
+            </li>
+            <li>
+              <a href="#" id="Payments"><i class="fas fa-wallet"></i> Driver</a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0);"
+                id="About"
+                onclick="toggleDropdown()"
+                aria-expanded="false"
+                ><i class="fas fa-history"></i> About</a
+              >
+
+              <div class="dropdown" id="aboutDropdown">
+                <a href=""> About Us</a>
+                <a href="">Blogs</a>
+                <a href="">Our Offers</a>
+              </div>
+            </li>
+            <li>
+              <a href="#" id="Settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="profile" id="profile">
+          <img src="https://placehold.co/40x40" alt="User profile picture" />
+          <div>
+            <!-- rider does not have status -->
+            <p>John</p>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="driver">
+          <div class="driverText">
+            <h1 class="driver-heading">
+              Drive when you<br />
+              want, make what<br />
+              you need
+            </h1>
+            <span class="subText">Earn on your own schedule.</span>
+            <div class="credientials">
+              <div class="getStartButton" id="get_started">
+                <a href="/signup"> Get started </a>
+              </div>
+              <div class="signinLink">
+                <a id="sign-in" href="/login"
+                  >Already Have an Account? Sign-in
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="map">
+            <img
+              class="driverImg"
+              alt="Drive with Uber"
+              src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_552,w_552/v1656511866/assets/67/3b671f-4ccd-484a-ad97-cded31823ed0/original/illustration-safety-01-1.png"
+              aria-hidden="true"
+              role="presentation"
+              class="css-ZwMiT"
+            />
+          </div>
+        </div>
+        <div class="maincart">
+          <div class="driver-with-us-containter">
+            <h1 class="cart-heading-text">Why drive with us ?</h1>
+            <img
+              class="driveWithUsImg"
+              alt="Why drive with us illustration"
+              src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_311,w_552/v1536163548/assets/d8/b61431-a847-461d-8c89-b260757259bd/original/whyDriveWithUs_tablet.svg"
+              aria-hidden="true"
+              role="presentation"
+            />
+          </div>
+
+          <div class="carts">
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  alt="Calendar Glyph"
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535521901/assets/04/2e9cbe-6142-4d19-bea4-627a1967cc74/original/calendar.svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  class="css-ZwMiT"
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>Set your own hours</h3>
+                <span>You decide when and how often you drive.</span>
+              </div>
+            </div>
+
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  alt="Money Glyph"
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535521926/assets/34/56a7a3-6c7b-46fc-a8c6-91d3271b92bd/original/money.svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  class="css-ZwMiT"
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>Get paid fast</h3>
+                <span>Weekly payments in your bank account.</span>
+              </div>
+            </div>
+
+            <div class="cart1">
+              <div class="cartpic">
+                <img
+                  alt="Support Glyph"
+                  src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535521963/assets/d3/c75f64-aac4-4df0-abd1-561b7ce4feab/original/support.svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  class="css-ZwMiT"
+                />
+              </div>
+              <div class="cartinfo">
+                <h3>Get support at every turn</h3>
+                <span
+                  >If there's anything that you need, you can reach us
+                  anytime.</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="sign-up-doc-container">
+            <h1 class="sign-up-doc-text">
+              Here's what you need to sign up...!
+            </h1>
+            <div class="carts">
+              <div class="cart1">
+                <div class="cartpic">
+                  <img
+                    alt="Star Glyph"
+                    src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535522671/assets/13/d90c65-0e16-40a4-950e-f8a7d9d68f2e/original/requirement.svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    class="css-ZwMiT"
+                  />
+                </div>
+                <div class="cartinfo">
+                  <h3 class="cardTxt">Requirements</h3>
+                  <ul>
+                    <li>Be at least 18 years old</li>
+                    <li>Clear a background screening</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cart1">
+                <div class="cartpic">
+                  <img
+                    alt="Document Glyph"
+                    src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535522710/assets/8e/cc5c27-1604-4e6f-ad4d-11fec148143a/original/document.svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    class="css-ZwMiT"
+                  />
+                </div>
+                <div class="cartinfo">
+                  <h3 class="cardTxt">Documents</h3>
+                  <ul>
+                    <li>
+                      Valid driver's license (private or commercial), if you
+                      plan to drive
+                    </li>
+                    <li>Proof of residency in your city, state or province</li>
+                    <li>
+                      Car documents such as commercial insurance, vehicle
+                      registration certificate, permit
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cart1">
+                <div class="cartpic">
+                  <img
+                    alt="Document Check Glyph"
+                    src="https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,h_24,w_24/v1535522753/assets/08/1702e0-ec8f-4ae4-8a80-110110732fb9/original/documentCheck.svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    class="css-ZwMiT"
+                  />
+                </div>
+                <div class="cartinfo">
+                  <h3 class="cardTxt">Signup process</h3>
+                  <ul>
+                    <li>Visit the nearest Partner Seva Kendra in your city</li>
+                    <li>Submit documents and photo</li>
+                    <li>Provide information for a background check</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="main-footer">
+          <div class="footer-info">
+            <a href="">Uber</a>
+            <h3>Visit Help Center</h3>
+          </div>
+          <div class="section">
+            <div class="block">
+              <h3>Company</h3>
+              <ul>
+                <li>About us</li>
+                <li>Our offering</li>
+                <li>Newsroom</li>
+                <li>Invester</li>
+                <li>Blog</li>
+                <li>careers</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Products</h3>
+              <ul>
+                <li>Ride</li>
+                <li>Drive</li>
+                <li>Delivery</li>
+                <li>Eat</li>
+                <li>Uber for bussiness</li>
+                <li>Uber freight</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Global citizenship</h3>
+              <ul>
+                <li>Safety</li>
+                <li>Sustainability</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Travel</h3>
+              <ul>
+                <li>Reserve</li>
+                <li>Airports</li>
+                <li>Cities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      function toggleDropdown() {
+        const dropdown = document.getElementById("aboutDropdown");
+        const toggleLink = document.querySelector("#About");
+        dropdown.classList.toggle("show");
+        toggleLink.setAttribute(
+          "aria-expanded",
+          dropdown.classList.contains("show")
+        );
+      }
+
+      window.onclick = function (event) {
+        if (!event.target.matches("#About")) {
+          const dropdowns = document.getElementsByClassName("dropdown");
+          for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+              const toggleLink = document.querySelector("#About");
+              toggleLink.setAttribute("aria-expanded", "false");
+            }
+          }
+        }
+      };
+
+      document
+        .getElementById("get_started")
+        .addEventListener("click", ()=> {
+            document.cookie = "user_role=driver; path=/";
+        });
+  
+
+      document.getElementById("submit").addEventListener("click", (e) => {
+        e.preventDefault();
+        let startLocation = document.getElementById("pickup").value;
+        let destinationLocation = document.getElementById("dropoff").value;
+        console.log(startLocation, destinationLocation);
+
+        window.location.href = `uber/rider/go?start=${startLocation}&dest=${destinationLocation}`;
+      });
+
+      document.getElementById("profile").addEventListener("click", function () {
+        window.location.href = "/uber/rider/profile";
+      });
+    </script>
+  </body>
+</html>

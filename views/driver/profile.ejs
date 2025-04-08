@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+    <link rel="stylesheet" href="/css/driver/driverProfile.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../includes/driverSidebar.ejs') %>
+
+      <div class="otherContent">
+        <div id="heading">
+          <h2>Driver Profile</h2>
+        </div>
+        <div>
+          <img src="" alt="" id="driver_pfp" />
+          <input type="file" name="document" id="edit_pfp">
+        </div>
+        <div id="section2">
+          <h2>Account Details</h2>
+          <div id="account_details">
+            <div class="inputFildes">
+              <label for="full_name">Full Name</label>
+              <span class="ip_icon">
+                <input type="text" name="full_name" id="full_name" />
+                <i class="fa-solid fa-user"></i>              </span>
+            </div>
+
+            <div class="inputFildes">
+              <label for="email">Email Address</label>
+              <span class="ip_icon">
+                <input type="text" name="email" id="email" />
+                <i class="fa-solid fa-envelope"></i>
+              </span>
+            </div>
+            <div class="inputFildes">
+              <label for="phone_number">Phone Number</label>
+              <span class="ip_icon">
+                <input type="text" name="phone_number" id="phone_number" />
+                <i class="fa-solid fa-phone"></i>              </span>
+            </div>
+
+            <div class="inputFildes">
+              <div onclick="javscript:location.href='/uploadDocument'">
+                See Your Documents 
+              </div>
+              </div>
+            <!-- <div class="inputFildes">
+              <label for="address">Address</label>
+              <span class="ip_icon">
+                <input type="text" name="address" id="address" />
+                <i class="fa-solid fa-house"></i>              </span>
+            </div> -->
+          </div>
+          <button id="update_profile">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/driver/driverProfile.js"></script>
+  </body>
+</html>

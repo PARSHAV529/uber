@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ..............main............. */
+
+.main-content, .chart-container {
+    flex: 1;
+    padding: 20px;
+    margin-left: 250px;
+}
+
+.chart-container {
+    
+}
+
+
+
+.main-content h4 {
+    margin: 30px 0 30px 0;
+}
+
+
+/* ...............key metrics............ */
+
+.key-metrics-container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.key-metrics-card {
+    background-color: #f4f4f4;
+    color: black;
+    padding: 30px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.key-metrics-card .avtar i {
+    font-size: 50px;
+    border: 2px solid black;
+    border-radius: 100%;
+    padding: 20px;
+}
+
+.key-metrics-card p {
+    font-weight: 700;
+    font-style: bold;
+    font-size: 20px;
+}
+
+.key-metrics-card span {
+    color: #6b7280;
+}
+
+.key-metrics-card button {
+    background-color: black;
+    color: white;
+    padding: 10px 0 10px 12px;
+    width: 100%;
+    margin: 8px 0px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    line-height: 24px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.key-metrics-card button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+  }
+  .tabs a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000000;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .tabs a.active {
+    cursor: pointer;
+    border-bottom: 2px solid #000000;
+  }
+
+  .filter{
+    display: flex;
+    justify-content: space-between;
+  }
+  #customRangeFrom{
+    display: flex;
+    gap: 20px;
+  }
+  .custom-range-form-div{
+      display: flex;
+    padding: 0 10px 0 0;
+    gap: 10px;
+
+  }
+
+  #customRangeFrom  input[type='date']{
+    border :1px solid #000000;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+#customRangeFrom input[type='submit']{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #000000;
+    color: #ffffff;
+}
+  /* .field{
+    padding: 10px;
+  } */
+
+  
+
+/* ...............activity.................. */
+
+.serch-driver-request-pagination{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.search{
+    width: 70%;
+    position: relative;
+}
+.search-input{
+    width: 100%;
+    padding: 10px 0 10px 12px;
+    border-radius: 8px;
+    background-color: #eee;
+    border: 2px solid transparent;
+    line-height: 24px;
+    margin: 8px 0px;
+    font-size: 16px;
+    
+}
+
+.search-btn{
+    position: absolute;
+    right: 30px;
+    cursor: pointer;
+    top: 40%;
+}
+
+.pagination{
+    width: 30%;
+    padding-left: 15%;
+    padding-right: 0;
+}
+
+.pagination button{
+    background-color: black;
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+.recent-activity-container,.users-list{
+    padding: 15px;
+    margin-bottom: 50px;
+}
+
+.performance-overview-container{
+    max-height: 25%;
+    overflow-y: scroll;
+}
+
+.activity-item  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 5px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.top-rated-drivers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.driver-name {
+    font-weight: 500;
+    display: inline-block;
+        width: 200px;
+}
+
+.activity-status,
+.activity-item i {
+    color: #6c757d;
+}
+
+.activity-time {
+    font-size: 12px;
+    color: #adb5bd;
+}
+
+.activity-action {
+    background: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.activity-action i {
+    color: white;
+}
+
+.activity-action:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}

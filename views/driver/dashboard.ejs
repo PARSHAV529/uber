@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/signup" id="get_started">Get Started</a>
+    <script>
+      document
+        .getElementById("get_started")
+        .addEventListener("click", ()=> {
+            document.cookie = "user_role=driver; path=/";
+        });
+    </script>
+  </body>
+</html>
