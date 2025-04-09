@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 
 import { response, errorResponse } from "../utils/helper.js";
 import { generateToken } from "../utils/generateToken.js";
+import { getIo } from "../socket.js";
 
 export const loginUser = async (req, res) => {
   try {
@@ -29,11 +30,33 @@ console.log(hashedPassword);
       const [d_id] = await db.query(
         `select id from driver where user_id='${data[0].id}'`
       );
-      console.log(d_id[0]);
+      console.log(d_id[0].id);
+      data[0].id = d_id[0].id 
       if (data[0]) {
 
         let token = generateToken(data[0],req.cookies.user_role)
-
+        res.cookie("accessToken", token, {
+          httpOnly: false,
+        });
+        // const io = getIo();
+        // // io.on("connection", (socket) => {
+        // //   console.log("soket connected");
+        //   // console.log(socket.id);
+        //   // io.on("disconnect", () => {
+        //   //   console.log("user disconnected");
+        //   // });
+        //   let count=0;
+        //   io.on('update-driver-location', async(data) => {
+        //     console.log(data)
+        //     console.log(count++);
+        //       // const decoded = jwtDecode(req.cookies.accessToken);
+        //       // const userId = decoded.id;
+        //     await db.execute('update driver set live_location=? where id =?',[JSON.stringify(data),"9"]);
+        //     io.emit('driver-location', data)
+        //   }
+        //   );
+        // }
+        // );
         console.log("token",token)
         return response(res, 200, data[0], "User Login Successfully");
         const accessToken = jwt.sign(

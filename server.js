@@ -10,7 +10,7 @@ const app = express();
 const __dirname = path.resolve();
 
 //middlewares
-app.set("view engine", "ejs")
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -93,6 +93,7 @@ app.get("/uber/admin/driver-detail", (req, res) => {
 
 import { router } from "./routes/auth.route.js";
 import db from "./config/dbConnection.js";
+import { jwtDecode } from "jwt-decode";
 app.use("/uber/api", router);
 
 //render your frontend page here
@@ -244,15 +245,19 @@ io.on("connection", (socket) => {
   // });
   let count=0;
   socket.on('update-driver-location', async(data) => {
-    console.log(data)
+    // console.log(data.decoded)
     console.log(count++);
-    // await db.execute('', [data.lat, data.lng]);
+      // const decoded = jwtDecode(req.cookies.accessToken);
+      // const userId = decoded.id;
+   const [result]= await db.execute('update driver set live_location=? where id =?',[JSON.stringify(data),data.decoded.id]);
     io.emit('driver-location', data)
+    console.log(result);
+    
   }
   );
 }
 );
-// io.on("update-driver-location", (data) => {
-//   console.log(data);
-// }
-// );
+io.on("update-driver-location", (data) => {
+  console.log(data);
+}
+);

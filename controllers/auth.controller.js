@@ -147,7 +147,7 @@ export const insertSignUpDetails = async (req, res) => {
           phNo,
           email: req.cookies.userEmail,
         },
-        process.env.JWT_SECRET_KEY_DRIVER
+        process.env.DRIVER_JWT_SECRETKEY
       );
     } else {
       accessToken = jwt.sign(
@@ -163,7 +163,7 @@ export const insertSignUpDetails = async (req, res) => {
     }
     res.clearCookie();
     res.cookie("accessToken", accessToken, {
-      httpOnly: true,
+      httpOnly: false,
     });
 
     return response(res, 200, {}, "sign up successfully...");

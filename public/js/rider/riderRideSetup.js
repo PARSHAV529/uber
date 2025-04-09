@@ -88,7 +88,7 @@ function initMap(source, destination) {
   new MapmyIndia.Polyline({
     map: map,
     paths: pts,
-    strokeColor: "blue",
+    strokeColor: "red",
     strokeOpacity: 1.0,
     strokeWeight: 4,
     fitbounds: true,
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.style.color = "rgb(145, 145, 145)";
     btn.style.backgroundColor = "rgb(243, 243, 243)";
     document.getElementById("loader").style.display = "block";
-    pts = [];
+   let pts = [];
 
     let loader = document.getElementById("loader");
 
