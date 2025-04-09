@@ -31,8 +31,13 @@ const CloudinaryUpload = (buffer) => {
 export const handleDriverDocumentCloudinary = async (req, res, next) => {
   console.log("klkl");
 
-  // console.log(req.file);
+  console.log(req.file);
   // console.log(req.files);
+  if (req.file.size > 5 * 1024 * 1024) {
+   return  errorResponse(res, 500, "File is too large, maximum size is 5MB");
+  }else{
+   
+
 
   if (req.files) {
     const {RC_BOOK,PUC,Insurance} = req.files
@@ -68,4 +73,5 @@ const files=[RC_BOOK[0],PUC[0],Insurance[0]]
   }else{
     next()
   }
+}
 };

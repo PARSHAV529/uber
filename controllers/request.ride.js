@@ -1,5 +1,7 @@
 import db from "../config/dbConnection.js";
 import { response } from "../utils/helper.js";
+import mapsdk from 'mapmyindia-sdk-nodejs';
+
 
 const requestRide = async (req, res) => {
   try {
@@ -28,11 +30,18 @@ const requestRide = async (req, res) => {
 const getDirections = async(req,res)=>{
     console.log("you are fetchibng directions");
     try{
-        let sql = `SELECT * FROM trip INNER JOIN trip_request ON trip_request.id=trip.trip_request_id INNER JOIN driver ON trip.DID=driver.id INNER JOIN uber_user ON uber_user.id = driver.user_id INNER JOIN  vehical ON vehical.DID=driver.id where trip.DID = 1 AND trip.status='accepted';`;
+        let sql = `SELECT * FROM trip INNER JOIN trip_request ON trip_request.id=trip.trip_request_id INNER JOIN driver ON trip.DID=driver.id INNER JOIN uber_user ON uber_user.id = driver.user_id INNER JOIN  vehicle ON vehicle.DID=driver.id where trip.DID = 1 AND trip.status='active';`;
 
         let result = await db.query(sql);
         console.log(result[0]);
-
+        
+        //  mapsdk.geoCodeGivenAddressString('43c2fc7cb353b21531b0f2d76c25a0af','esparkbiz').then(function(res)
+        //  {
+        //      console.log(JSON.stringify(res));
+        //  }).catch(function(ex){
+        //      console.log('came in catch');
+        //      console.log(ex);
+        //  });
         response(res,201,result,'directions received successfully')
     }
     catch(error){
@@ -74,5 +83,7 @@ const riderRideReview = async(req,res)=>{
     console.log();
   }
 }
+
+
 
 export { requestRide,getDirections,cancelRide,riderRideReview};

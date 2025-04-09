@@ -15,7 +15,14 @@ btnLogin.addEventListener("click", async () => {
     body: JSON.stringify(data)
   });
 
+  let statusCode = responsetxt.status;
   const response = await responsetxt.json();
+
+  if(statusCode === 200){
+    setTimeout(() => {
+      location.href = "driver/home"
+    }, 1000);
+  }
 
   console.log("response Text :", response);
 });

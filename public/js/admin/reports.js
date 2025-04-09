@@ -119,3 +119,8 @@ function setPerformanceOverviewData(data, id) {
     performance_overview.innerHTML = "<p>No data found</p>";
   }
 }
+
+async function viewDriver(driver_id) {
+  localStorage.setItem("driverProfile", driver_id);
+  window.location.href = "/uber/admin/driver-detail";
+}

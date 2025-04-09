@@ -4,6 +4,7 @@ import {
   getRideRequest,
   postDriverEarningsDates,
   postDriverProfileData,
+  updateDriverStatus,
 } from "../controllers/driver.controller.js";
 
 const router = express.Router();
@@ -41,7 +42,6 @@ router.post("/driver/profile-data",handleDriverDocument.single('document'),handl
 router.get("/all-rides/:dId?/:r_type?", getAllRides);
 router.post("/get-notification-details", getNotifiationDetails);
 router.get("/generate-qr-code", generateQR);
-
-
+router.get("/updateStatus/:status?/:d_id?",updateDriverStatus)
 
 export default router;

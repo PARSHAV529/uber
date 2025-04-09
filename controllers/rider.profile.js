@@ -38,4 +38,24 @@ const updateRiderProfile = async(req,res)=>{
         response(res,400,error,'could not update data');
     }
 }
-export {getRiderProfile,updateRiderProfile}
+
+const updateRiderProfilePicture = async(req,res)=>{
+    try{
+        console.log(req.body);
+        
+        let sql = `UPDATE uber_user set profile_photo = ? WHERE id = 3`;
+
+        const result = await db.query(sql, [
+            `${req.body.url}`
+          ]);
+        console.log(result);
+
+        response(res,201,result,'profile data updated successfully')
+    }
+    catch(error){
+        console.log(error);
+        response(res,400,error,'could not update data');
+    }
+}
+
+export {getRiderProfile,updateRiderProfile, updateRiderProfilePicture}

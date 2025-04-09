@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <script
+    src="https://apis.mapmyindia.com/advancedmaps/api/43c2fc7cb353b21531b0f2d76c25a0af/map_sdk?layer=vector&v=2.0&callback=initMap1"
+    defer async></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/driver/driverHistory.css">
+  <link rel="stylesheet" href="/css/driver/driverDashboard.css">
+  <style>
+    #map {
+              margin: 0;
+              padding: 0;
+              width: 100%;
+              height: 100vh;
+              }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <%- include('../includes/driverSidebar.ejs') %>
+        <div class="driver-dashboard-body">
+            <h2>Dashboard</h2>
+            <div class="drive-dash-mainBox">
+                <div class="driver-status">
+                    <div class="driverBtn">
+                        <label class="toggle">
+                            <input type="checkbox" id="btnToggle" name="btnToggle" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <span id="mode"></span>
+                </div>
+                <div class="main-map">
+                    <div id="map"></div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/driver/driverDashboardTemp.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security</title>
+    <link rel="stylesheet" href="/css/rider/riderPrivacy.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="header">
+          <i class="fas fa-bars"></i>
+          <span>Uber</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/uber/rider" id="home">
+                <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li>
+              <a href="/uber/rider/profile" id="account">
+                <i class="fas fa-user"></i>Account</a>
+            </li>
+            <li>
+              <a href="/uber/rider/security" id="security">
+                <i class="fas fa-lock"></i>Security</a>
+            </li>
+            <li>
+              <a href="/uber/rider/privacy" class="active" id="privacy">
+                <i class="fas fa-info-circle"></i>Privacy & Data</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="main">
+        <div class="profile-content">
+          <div class="header"><p>Privacy Center</p></div>
+          <p class="sub-text">Take control of your privacy and learn how we protect it</p>
+          <div id="content">
+            <p class="sub-header">Your data and privacy at Uber</p>
+            <div id="cards" class="cards" style="display: block;">
+                <ul class="card-content">
+                    <li class="card" style="grid-column: span 2; list-style: none;">
+                        <div class="card-div">
+                            <img src="https://d3i4yxtzktqr9n.cloudfront.net/iris-web/e57d7849169c0035.webp" alt="Would you like to see a summary of how you use Uber?" style="height: 80px;
+                            object-fit: cover;
+                            width: 100%;
+                            margin: 0;">
+                            <div class="div1" style="color: #000000; font-family: UberMoveText, system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 500; font-size: 16px; line-height: 20px;">
+                                <div>Would you like to see a summary of how you use Uber?</div>
+                                <div class="div2">
+                                    <button id="summary">See summary</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    <li class="card" style="grid-column: span 2;">
+                        <div class="card-div">
+                            <img src="https://d3i4yxtzktqr9n.cloudfront.net/iris-web/8028a169a7c6d18b.webp" alt="How does your data shape your trip experience?" style="height: 80px;
+                            object-fit: cover;
+                            width: 100%;
+                            margin: 0;">
+                            <div class="div1" style="color: #000000; font-family: UberMoveText, system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 500; font-size: 16px; line-height: 20px;">
+                                <div>How does your data shape your trip experience?</div>
+                                <div class="div2">
+                                    <button id="data">View</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/rider/riderPrivacy.js"></script>
+  </body>
+</html>

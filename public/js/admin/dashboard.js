@@ -128,7 +128,7 @@ customRangeFrom.addEventListener("submit", async (e) => {
 });
 
 function setKeyMetrics(data) {
-  // console.log(data);
+  console.log(data);
   const activeDrivesDiv = document.getElementById("active-driver-count");
   const activeUsersDiv = document.getElementById("active-users-count");
   const activeRidessDiv = document.getElementById("active-rides-count");

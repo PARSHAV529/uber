@@ -24,7 +24,7 @@
             <a
               href="/uber/admin"
               id="Home"
-              class="active"
+              class="defaultClass"
               onclick="addActiveClass(event)"
               ><i class="fas fa-home"></i> Dashboard</a
             >
@@ -34,6 +34,7 @@
             <a
               href="/uber/admin/documents"
               id="Docs"
+              class="defaultClass"
               onclick="addActiveClass(event)"
               ><i class="fa-solid fa-id-card"></i>Documents verification</a
             >
@@ -42,6 +43,7 @@
             <a
               href="/uber/admin/reports"
               id="Report"
+              class="defaultClass"
               onclick="addActiveClass(event)"
               ><i class="fa-solid fa-square-poll-vertical"></i> Report</a
             >
@@ -51,6 +53,7 @@
             <a
               href="/uber/admin/users"
               id="Drivers"
+              class="defaultClass"
               onclick="addActiveClass(event)"
               ><i class="fa-solid fa-users"></i> Users</a
             >
@@ -65,6 +68,23 @@
         </div>
       </div>
     </div>
-    <script></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const links = document.querySelectorAll(".defaultClass");
+
+        links.forEach((link) => {
+          if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+          }
+
+          // Update click handler
+          link.addEventListener("click", function (event) {
+            links.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -35,7 +35,7 @@ async function getRides(ride_type) {
   const response = await responsetxt.json();
 
   console.log("response Text :", response);
-  renderRides(response.data);
+  renderRides(response.data.rides);
 }
 
 function renderRides(rides) {
@@ -138,3 +138,11 @@ function convertTime(time) {
 }
 
 getRides("all");
+
+const profile = document.querySelector(".profile");
+profile.style.cursor = "pointer"
+
+  profile.addEventListener("click",(e)=>{
+    console.log(e.currentTarget);
+    location.href = '/driver/profile'
+  })

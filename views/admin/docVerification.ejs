@@ -21,14 +21,14 @@
           Documents &nbsp; &gt; &nbsp; Verification
         </h3>
 
+        
         <h4>Driver's Documents</h4>
-
         <div class="document-list-container" id="document-list-container">
         </div>
 
+        
         <h4>Vehicle Documents</h4>
-
-        <div class="vehicle-document-list-container">
+        <div id="vehicle-details-div" class="vehicle-document-list-container">
           <div class="driver-doc-list" id="PUC-div">
             <div class="driver-info">
             <i class="fa-solid fa-car-side"></i>
@@ -74,12 +74,21 @@
           <div class="vehicle-btns">
             <button class="vehicle-accept" id="vehicle-accept">Accept Vehicle</button>
             <button class="vehicle-reject" id="vehicle-reject">Reject Vehicle</button>
-            <input type="text" placeholder="please enter reason for rejection of vehicle" id="vehicle-reject-input" class="doc-reject-input"/>
+            
+          </div>
+          <div id="vehcle-rejection-div" style="display: none; flex-direction: column; justify-content: end;">
+            <form id="vehicle-rejection-form" style="display: flex;
+          flex-direction: column;
+          align-items: end;" >
+
+            <input type="text" name="vehicle-reject-input" placeholder="please enter reason for rejection" id="vehicle-reject-input" class="vehicle-reject-input"/>
+            <button  class="modal-reject-btn" id="submit-vehicle-rejection-form" >Submit</button>
+          </form>
           </div>
 
-          <div class="driver-btns">
-            <button class="driver-accept" id="driver-accept">Driver Approval</button>
-          </div>
+        </div> 
+        <div class="driver-btns">
+          <button class="driver-accept" id="driver-accept">Final submit</button>
         </div>
 
     <!-- driver document modal -->
@@ -90,11 +99,20 @@
         <div class="modal-image-container">
             <embed id="modalImage" src="" alt="Document Image" />
         </div>
-        <input type="text" placeholder="please enter reason for rejection" id="doc-reject-input" class="doc-reject-input"/>
+        <div id="rejection-reason-div" style="display: none; flex-direction: column; justify-content: end;">
+          <form id="doc-rejection-form" style="display: flex;
+          flex-direction: column;
+          align-items: end;" >
+
+            <input type="text" name="doc-reject-input" placeholder="please enter reason for rejection" id="doc-reject-input" class="doc-reject-input"/>
+            <button  class="modal-reject-btn" id="submit-rejection-form" >Submit</button>
+          </form>
+        </div>
         <div id="modal-btns-div" class="modal-buttons">
           <!-- <button id="modal-reject-btn"  class="modal-reject-btn">Reject</button>
           <button id="modal-accept-btn" class="modal-accept-btn">Accept</button> -->
         </div>
+        
       </div>
     </div>
 

@@ -179,11 +179,12 @@
 #pop-up-box .ride-request-details{
     padding: 20px;
     width: calc(100% - 40px);
-    height: calc(100% - 193px);
+    height: calc(100% - 201px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 25px;
+    overflow-y: scroll;
 }
 
 #pop-up-box .ride-request-details p{

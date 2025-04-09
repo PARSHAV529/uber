@@ -29,6 +29,13 @@ adminRoutes.get("/protected-route", verifyAdminLogin, protectedController);
 
 adminRoutes.post("/login", postAdminLogin);
 
+// adminRoutes.get("/uber/admin/doc-verification/:driver_id", (req, res) => {
+
+//   // res.send(`admin/docVerification ${req.params.driver_id}}`);
+
+//   res.render("admin/docVerification" ,{ driver_id:req.params.driver_id});
+// });
+
 // dashboard apis
 adminRoutes.get("/active-drivers", verifyAdminLogin, activeDrivers);
 adminRoutes.get("/get-chart-data", getChartData);
@@ -48,6 +55,8 @@ adminRoutes.get("/todays-rides-details", todaysRidesDetails);
 adminRoutes.get("/top-performing-drivers", topPerformingDrivers);
 
 //profile page apis
+adminRoutes.get("/users", getAllUsers);
+adminRoutes.post("/driver", getDriverDetails);
 
 adminRoutes.get("/get-chart-data", getChartData);
 

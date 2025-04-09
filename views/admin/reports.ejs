@@ -10,6 +10,14 @@
     />
 
     <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <style>
+      .top-performer-container {
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 0 15px;
+        margin-bottom: 30px;
+      }
+    </style>
   </head>
 
   <body onload="routeCheck()">
@@ -46,68 +54,35 @@
             <span id="total-failed-transactions-count"></span>
             <button>View Details</button>
           </div>
-
-          <!-- <div class="key-metrics-card">
-          <div class="avtar">
-            <i class="fa-solid fa-wallet"></i>
-          </div>
-          <p>Today's Revenue</p>
-          <span id="today-revenue-count"></span>
-          <button>View Details</button>
-        </div> -->
         </div>
 
         <h4>Performance Overview</h4>
 
-        <!-- <div class="serch-driver-request-pagination">
-        <div class="search">
-          <input type="text" class="search-input" id="search-input" placeholder="search driver request by his name" />
-          <div class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0 0">Top rated drivers</h4>
+          <div
+            class="performance-overview-container"
+            id="top-rated-drivers-container"
+          ></div>
         </div>
-        <div class="pagination">
-          <button>
-            << </button>
-            <button>
-              
-              < </button>
-              <button>1</button>
-              <button>></button>
-              <button>>></button>
-            </div>
-          </div> -->
 
-        <h4 style="margin: 20px 0 0">Top rated drivers</h4>
-        <div
-          class="performance-overview-container"
-          id="top-rated-drivers-container"
-        >
-          <!-- <div id="top-rated-drivers" class="top-rated-drivers">
-          <span class="driver-name">Name</span>
-          <span class="activity-status">Rating</span>
-          <span class="activity-status">Completed Rides</span>
-          <span class="activity-status">Earning</span>
-        </div> -->
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0">Drivers with most rides</h4>
+          <div
+            class="performance-overview-container"
+            id="most-completed-rides-drivers-container"
+          ></div>
         </div>
-        <hr style="border: 1px solid #ddd" />
 
-        <h4 style="margin: 10px 0">Drivers with most rides</h4>
-        <div
-          class="performance-overview-container"
-          id="most-completed-rides-drivers-container"
-        ></div>
-        <hr style="border: 1px solid #ddd" />
-
-        <h4 style="margin: 10px 0">Low rated drivers</h4>
-        <div
-          class="performance-overview-container"
-          id="low-rated-drivers-container"
-        ></div>
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0">Low rated drivers</h4>
+          <div
+            class="performance-overview-container"
+            id="low-rated-drivers-container"
+          ></div>
+        </div>
       </div>
     </div>
-
-    <!-- <script src="/js/admin/dashboard.js"></script> -->
     <script src="/js/admin/reports.js"></script>
   </body>
 </html>

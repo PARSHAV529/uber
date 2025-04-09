@@ -97,24 +97,48 @@ export const getDriverEarnings = async (req, res) => {
   try {
     const [LastWeek] = await db.execute(
       "SELECT sum(payment.fare_amount) as payment FROM payment left join trip on payment.trip_id=trip.id WHERE trip.DID = ? and  payment.created_at >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY AND payment.created_at < curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY group by trip.DID",
-      [userId]
+      ["1"]
     );
     // console.log(LastWeek);
     const [thisWeek] = await db.execute(
       "select sum(payment.fare_amount) as payment from payment left join trip on payment.trip_id=trip.id WHERE trip.DID = ? and week(payment.created_at) = week(now()) group by trip.DID",
-      [userId]
+      ["1"]
     );
     const [thisMonth] = await db.execute(
       "select sum(payment.fare_amount) as payment from payment left join trip on payment.trip_id=trip.id WHERE trip.DID = ? and month(payment.created_at) = month(now()) group by trip.DID",
-      [userId]
+      ["1"]
     );
     const [lastMonth] = await db.execute(
       "SELECT sum(payment.fare_amount) as payment from payment left join trip on payment.trip_id=trip.id WHERE trip.DID = ? and  YEAR(payment.created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND MONTH(payment.created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) group by trip.DID",
-      [userId]
+      ["1"]
     );
 
     console.log("LastWeek");
-    let groupBy = "week";
+    console.log(LastWeek);
+    response(
+      res,
+      200,
+      {
+        This_Month: thisMonth,
+        This_Week: thisWeek,
+        Last_Month: lastMonth,
+        Last_Week: LastWeek,
+      },
+      ""
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postDriverEarningsDates = async (req, res) => {
+  const decoded = jwtDecode(req.cookies.accessToken);
+  const userId = decoded.id;
+  console.log("inside postDriverEarningsDates");
+  console.log(req.body);
+
+  try {
+    let groupBy = req.body.groupby;
     // let groupByClause = "";
 
     let orderByClause = "";
@@ -164,125 +188,6 @@ export const getDriverEarnings = async (req, res) => {
       orderByClause = "ORDER BY period_number";
     }
 
-    const query = `
-
- SELECT 
-
- sum(payment.fare_amount) as fare_amount,trip.DID, ${selectExtras}
-
- FROM payment left join trip on payment.trip_id=trip.id
-
- WHERE   payment.created_at BETWEEN ? AND ?
- group by period_number,period_start,period_end,label,trip.DID
- having trip.DID=?
-
- ${orderByClause};
-
-`;
-
-    const [rows] = await db.execute(query, [
-      "2025-03-01 14:49:51",
-      "2025-03-01 14:49:51",
-      "2025-04-30 16:14:33",
-      userId,
-    ]);
-
-    // const [rows] = await db.execute(
-
-    //   `SELECT
-
-    //     FLOOR(DATEDIFF(created_at, ?)/30)+1 AS week_number,
-
-    //     DATE_SUB(created_at, INTERVAL WEEKDAY(created_at) DAY) AS week_start,
-
-    //    DATE_ADD(DATE_SUB(created_at, INTERVAL WEEKDAY(created_at) DAY), INTERVAL 30 DAY) AS week_end, payment.*
-    //    FROM payment
-
-    //    WHERE created_at BETWEEN ? AND ?
-
-    //    ORDER BY week_start`,
-
-    //   ["2025-03-01 14:49:51","2025-03-01 14:49:51", "2025-04-30 16:14:33"]
-
-    //  );
-    console.log("rows");
-    console.log(rows);
-
-    // console.log(LastWeek);
-    response(
-      res,
-      200,
-      {
-        This_Month: thisMonth,
-        This_Week: thisWeek,
-        Last_Month: lastMonth,
-        Last_Week: LastWeek,
-        rows,
-      },
-      ""
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const postDriverEarningsDates = async (req, res) => {
-  const decoded = jwtDecode(req.cookies.accessToken);
-  const userId = decoded.id;
-  console.log("inside postDriverEarningsDates");
-  console.log(req.body);
-
-  try {
-    let groupBy = req.body.groupby;
-    // let groupByClause = "";
-
-    let orderByClause = "";
-
-    let selectExtras = "";
-
-    if (groupBy === "week") {
-      selectExtras = `
-
-  FLOOR(DATEDIFF(payment.created_at, ?) / 7) + 1 AS period_number,
-
-  DATE_SUB(payment.created_at, INTERVAL WEEKDAY(payment.created_at) DAY) AS period_start,
-
-  DATE_ADD(DATE_SUB(payment.created_at, INTERVAL WEEKDAY(payment.created_at) DAY), INTERVAL 6 DAY) AS period_end,
- DATE_FORMAT(payment.created_at, '%b') AS 
- label
- `;
-
-      orderByClause = "ORDER BY period_number";
-    }  else if (groupBy === "month") {
-      selectExtras = `
-
-  PERIOD_DIFF(DATE_FORMAT(payment.created_at, '%Y%m'), DATE_FORMAT(?, '%Y%m')) + 1 AS period_number,
-
-  DATE_FORMAT(payment.created_at, '%Y-%m-01') AS period_start,
-
-  LAST_DAY(payment.created_at) AS period_end,
-  DATE_FORMAT(payment.created_at, '%M') AS 
- label
-
- `;
-
-      orderByClause = "ORDER BY period_number";
-    } else if (groupBy === "year") {
-      selectExtras = `
-
-  YEAR(payment.created_at) - YEAR(?) + 1 AS period_number,
-
-  DATE_FORMAT(payment.created_at, '%Y-01-01') AS period_start,
-
-  DATE_FORMAT(payment.created_at, '%Y-12-31') AS period_end,
-    DATE_FORMAT(payment.created_at, '%Y') AS 
- label
-
- `;
-
-      orderByClause = "ORDER BY period_number";
-    }
-
     let query = `
 
  SELECT 
@@ -299,56 +204,47 @@ having trip.DID=?
 `;
     console.log("inside post");
     // having trip.DID=?
-//     else if (groupBy == "day") {
-// console.log('INSIDE DAY');
+    //     else if (groupBy == "day") {
+    // console.log('INSIDE DAY');
 
-//       selectExtras = `
+    //       selectExtras = `
 
-//   FLOOR(DATEDIFF(payment.created_at, ?)) + 1 AS period_number,
+    //   FLOOR(DATEDIFF(payment.created_at, ?)) + 1 AS period_number,
 
-//  payment.created_at AS period_start,
+    //  payment.created_at AS period_start,
 
-//   payment.created_at AS period_end,
-//  DATE_FORMAT(payment.created_at, '%b') AS 
-//  label
-//  `;
+    //   payment.created_at AS period_end,
+    //  DATE_FORMAT(payment.created_at, '%b') AS
+    //  label
+    //  `;
 
-//       orderByClause = "ORDER BY period_number";
-//     }
-if(groupBy == "day"){
-  console.log('INSIDE DAY');
-  query= `select DATE(created_at) as label , fare_amount as fare_amount from payment where created_at >= DATE('${req.body.start_date}') and created_at <=  DATE('${req.body.end_date}')  ORDER BY label`
-try {
-  const [rows] = await db.execute(query, [
-    req.body.start_date,
-    req.body.start_date,
-    req.body.end_date,
-    userId,
-  ]);
-  console.log("rows");
-  console.log(rows);
+    //       orderByClause = "ORDER BY period_number";
+    //     }
+    if (groupBy == "day") {
+      console.log("INSIDE DAY");
+      query = `select DATE(created_at) as label , fare_amount as fare_amount from payment where created_at >= DATE('${req.body.start_date}') and created_at <=  DATE('${req.body.end_date}')  ORDER BY label`;
+      try {
+        const [rows] = await db.execute(query, [
+          req.body.start_date,
+          req.body.start_date,
+          req.body.end_date,
+          userId,
+        ]);
+        console.log("rows");
+        console.log(rows);
 
-
- return response(
-    res,
-    200,
-    {
-      rows,
-    },
-    ""
-  );
-} catch (error) {
-  console.log(error
-
-  );
-  
-}
-  
-
-  
-
-
-}
+        return response(
+          res,
+          200,
+          {
+            rows,
+          },
+          ""
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
     const [rows] = await db.execute(query, [
       req.body.start_date,
       req.body.start_date,
@@ -356,10 +252,8 @@ try {
       userId,
     ]);
 
-    
     console.log("rows");
     console.log(rows);
-
 
     response(
       res,
@@ -460,6 +354,7 @@ export const postDriverProfileData = async (req, res) => {
   //   console.log(error);
   // }
 };
+
 export const getDriverProfileData = async (req, res) => {
   const decoded = jwtDecode(req.cookies.accessToken);
   const userId = decoded.id;
@@ -490,13 +385,25 @@ export const getAllRides = async (req, res) => {
     const r_type = req.params.r_type;
 
     let query = `select t.trip_request_id,DATE(t.pickup_time) as date,tr.drop_location,tr.pickup_location,tr.vehicle_preference,tr.distance,t.pickup_time,t.drop_time,t.Fare_amount,t.status from trip as t inner join trip_request as tr on t.trip_request_id=tr.id where t.DID=${d_id}`;
-
+    let [dayIncome] = await db.query(
+      `SELECT sum(fare_amount) as total FROM uber.trip where DID='${d_id}' and date(pickup_time)=CURDATE()  and status="completed";`
+    );
+    dayIncome = dayIncome[0].total;
+    let [totalRides] = await db.query(
+      `SELECT count(*) as total FROM uber.trip where DID='${d_id}' and date(pickup_time)=CURDATE()  and status="completed";`
+    );
+    totalRides = totalRides[0].total;
     if (r_type != "all") {
       query += ` and t.status='${r_type}'`;
     }
-
     const [rides] = await db.query(query);
-    response(res, 200, rides, "All rides fetched Successfully");
+
+    const data = {
+      rides: rides,
+      dailyIncome: dayIncome,
+      dailyRides: totalRides,
+    };
+    response(res, 200, data, "All rides fetched Successfully");
   } catch (error) {
     errorResponse(res, 500, "Internal server error");
   }
@@ -533,8 +440,14 @@ export const generateQR = async (req, res) => {
   }
 };
 
-export const driverStatus = async (req, res) => {
+export const updateDriverStatus = async (req, res) => {
   try {
+    const status = req.params.status == "online" ? 1 : 0;
+    const query = `update driver set is_online='${status}' where id=${req.params.d_id}`;
+
+    const [result] = await db.query(query);
+
+    response(res, 200, result, "Status Updated Successfully");
   } catch (error) {
     console.log(`driverStatus : Error : ${error.message}`);
     return errorResponse(res, 500, `${error.message}`);

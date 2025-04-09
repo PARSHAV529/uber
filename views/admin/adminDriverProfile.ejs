@@ -18,6 +18,150 @@
       <!-- Main Content -->
       <div class="main-content">
         <h3>Users &nbsp; &gt; &nbsp; Driver Profile</h3>
+
+        <div class="profile-con-container">
+          <div class="profile-container">
+            <div class="upper">
+              <div class="upper-left">
+                <div class="image-cotainer">
+                  <img
+                    src=""
+                    alt=""
+                    id="driver-profile-img"
+                    width="100px"
+                    height="100px"
+                  />
+                </div>
+              </div>
+
+              <div class="upper-right">
+                <h1 class="driver-name" id="driver-name"></h1>
+
+                <!-- <span>ratings: </span> -->
+                <div class="rating">
+                  <div class="star-rating" id="star-rating"></div>
+                  <h4 class="rating-count" id="rating-count"></h4>
+                </div>
+
+                <div class="ride-details">
+                  <div class="total-rides">
+                    <h4 id="total-ride-count"></h4>
+                    <span>Total rides</span>
+                  </div>
+
+                  <div class="completed-rides">
+                    <h4 id="completed-ride-count"></h4>
+                    <span>Completed rides</span>
+                  </div>
+
+                  <div class="earning">
+                    <h4 id="earning-count"></h4>
+                    <span>Earnings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lower">
+              <div class="tabs">
+                <button
+                  class="tab active-tab"
+                  onclick="setTabs(event)"
+                  id="tabs"
+                  value="basic"
+                >
+                  Basic Details
+                </button>
+
+                <button
+                  class="tab"
+                  onclick="setTabs(event)"
+                  id="tabs"
+                  value="vehicle"
+                >
+                  Vehicle Details
+                </button>
+              </div>
+
+              <div class="lower-left" id="lower-left">
+                <div class="left-div-el">
+                  <b>Vehicle Type: </b>
+                  <span id="vehicle-type"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Vehical Approved: </b>
+                  <span id="vehical-approved"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Capacity: </b>
+                  <span id="capacity"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Colour: </b>
+                  <span id="colour"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Insurance Expiry Date:</b>
+                  <span id="insurance-exp-date"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Number Plate: </b>
+                  <span id="number_plate"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>PUC Expiry Date: </b>
+                  <span id="puc-exp-date"></span>
+                </div>
+              </div>
+
+              <div class="lower-right" id="lower-right">
+                <div class="left-div-el">
+                  <b>DOB: </b>
+                  <span id="DOB"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Email: </b>
+                  <span id="driver-email"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Document Status: </b>
+                  <span id="document-status"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Live Location: </b>
+                  <span id="live-location">
+                    [Longitude: &nbsp; <span id="longitude"></span>, &nbsp;
+                    Latitude: &nbsp; <span id="latitude"></span>]
+                  </span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Phone Number:</b>
+                  <span id="phone-number"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Driving Licence Number:</b>
+                  <span id="dl-number"></span>
+                </div>
+
+                <div class="left-div-el">
+                  <b>Driving Licence Expiry Date: </b>
+                  <span id="dl-exp-date"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

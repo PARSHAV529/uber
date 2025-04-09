@@ -1,25 +1,25 @@
-.driver-dashboard-body{
-    margin-left: 290px;
-    padding: 20px;
-    width: calc(100vw - 330px);
-    height: calc(100% - 40px);
-    background-color: white;
+.driver-dashboard-body {
+  margin-left: 290px;
+  padding: 20px;
+  width: calc(100vw - 330px);
+  height: calc(100% - 40px);
+  background-color: white;
 }
 
-.driver-dashboard-body h2{
-    padding: 10px;
-    width: calc(100% - 20px);
-    margin: 0;
+.driver-dashboard-body h2 {
+  padding: 10px;
+  width: calc(100% - 20px);
+  margin: 0;
 }
 
-.driver-dashboard-body .drive-dash-mainBox{
-    border: 1px solid black;
-    padding: 20px;
-    width: calc(100% - 42px);
-    height: calc(100% - 86px);
+.driver-dashboard-body .drive-dash-mainBox {
+  border: 1px solid black;
+  padding: 20px;
+  width: calc(100% - 42px);
+  height: calc(100% - 86px);
 }
 
-.driver-status{
+.driver-status {
   padding: 10px;
   width: calc(100% - 20px);
   display: flex;
@@ -27,50 +27,114 @@
   align-items: center;
 }
 
-.driver-status span{
+.driver-status span {
   font-size: 22px;
   font-weight: bold;
 }
 
-  .toggle{
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-  .toggle input{
-    display: none;
-  }
+.toggle input {
+  display: none;
+}
 
-  .slider{
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right :0;
-    bottom: 0;
-    background-color: red;
-    transition : 0.4s;
-    border-radius: 34px;
-  }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+  transition: 0.4s;
+  border-radius: 34px;
+}
 
-  .slider::before{
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #fff;
-    transition: 0.4s;
-    border-radius: 50%;
-  }
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  transition: 0.4s;
+  border-radius: 50%;
+}
 
-  input:checked + .slider{
-    background-color: #060;
-  }
+.summary-card i img {
+  height: 30px;
+}
 
-  input:checked + .slider::before{
-    transform: translateX(26px);
-  }
+input:checked + .slider {
+  background-color: #060;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+.current-status {
+  background: #f4f4f4;
+}
+
+.current-status div {
+  margin: 2%;
+}
+
+.current-status div img,
+h2,
+h4,
+button {
+  margin: 1%;
+}
+
+#box-online h2{
+  color : green;
+}
+
+#box-offline h2{
+  color : red;
+}
+
+.current-status div button,#btnStart{
+  color: #fff;
+  background: #000;
+  border: none;
+  height: 40px;
+  width: 120px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+#box-online img,
+#box-offline img {
+  height: 30px;
+}
+ .status-box-online {
+  display: block;
+}
+
+.status-box-offline {
+  display: none;
+}
+
+#map{
+  height: 500px;
+  width: 1400px;
+  margin: auto;
+}
+
+.customMarkerClass {
+  height: 30px;
+  width: 40px;
+  background-image: url("/source/marker.png");
+}

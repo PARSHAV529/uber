@@ -3,10 +3,10 @@ import db from "../config/dbConnection.js";
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import { response, errorResponse } from "../utils/helper.js";
-import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
+dotenv.config();
+import jwt from "jsonwebtoken";
 import { jwtDecode } from "jwt-decode";
-import { log } from "console";
-
 export const emailAuth = async (req, res) => {
   try {
     const email = req.body.email;
@@ -58,6 +58,7 @@ export const emailAuth = async (req, res) => {
 
           return errorResponse(res, 400, `${error.message}`);
         } else {
+          // return errorResponse(res, 409, "This Email is already in use. Try another Email !");
           const encOTP = await bcrypt.hash(otp, 10);
 
           res.cookie("otp", encOTP, {
@@ -125,27 +126,44 @@ export const insertSignUpDetails = async (req, res) => {
     }
 
     const encPassword = await bcrypt.hash(pass, 10);
-    let accessToken 
+    let accessToken;
     const query = `Insert into  uber_user (first_name , last_name , phone_number , email , password ) values('${fname}' , '${lname}' ,'${phNo}' ,'${req.cookies.userEmail}' , '${encPassword}'   )`;
     const [result] = await db.execute(query);
-   
+
     // console.log(decode);
     console.log(result);
-    if(req.cookies?.user_role == 'driver'){
-    
-      const [resultDriver] = await db.execute('insert into driver(user_id) values(?)', [result.insertId]);
+    if (req.cookies?.user_role == "driver") {
+      const [resultDriver] = await db.execute(
+        "insert into driver(user_id) values(?)",
+        [result.insertId]
+      );
       console.log(resultDriver);
-    
-      accessToken  = jwt.sign({id:resultDriver.insertId,fname,lname,phNo,email:req.cookies.userEmail}, process.env.JWT_SECRET_KEY_DRIVER);
-    
 
-    
-  }else{
-    accessToken  = jwt.sign({id:result.insertId,fname,lname,phNo,email:req.cookies.userEmail}, process.env.JWT_SECRET_KEY_RIDER);
-  }
-  res.clearCookie();
+      accessToken = jwt.sign(
+        {
+          id: resultDriver.insertId,
+          fname,
+          lname,
+          phNo,
+          email: req.cookies.userEmail,
+        },
+        process.env.JWT_SECRET_KEY_DRIVER
+      );
+    } else {
+      accessToken = jwt.sign(
+        {
+          id: result.insertId,
+          fname,
+          lname,
+          phNo,
+          email: req.cookies.userEmail,
+        },
+        process.env.JWT_SECRET_KEY_RIDER
+      );
+    }
+    res.clearCookie();
     res.cookie("accessToken", accessToken, {
-      httpOnly: true
+      httpOnly: true,
     });
 
     return response(res, 200, {}, "sign up successfully...");
@@ -165,8 +183,7 @@ export const getDriverSignupDocumentPageData = async (req, res) => {
 
   const decoded = jwtDecode(req.cookies.accessToken);
   console.log(decoded);
-  
-  
+
   const [userStatus] = await db.execute(
     "select document_id,Remark,is_approved,document_url,document_list.document_name,document_list.id from documents left join document_list on documents.document_id=document_list.id where DID = ?",
     [decoded.id]
@@ -186,22 +203,22 @@ export const getDriverSignupDocumentPageData = async (req, res) => {
   }
   response(res, 200, responseData);
 };
-export const getDriverSignupVehicalData = async (req, res) => {
+export const getDriverSignupvehicleData = async (req, res) => {
   console.log(req.cookies.accessToken);
 
   const decoded = jwtDecode(req.cookies.accessToken);
   const userId = decoded.id;
   try {
-    const [vehical_approved] = await db.execute(
-      "select vehical_approved from driver where id = ?",
+    const [vehicle_approved] = await db.execute(
+      "select vehicle_approved from driver where id = ?",
       [userId]
     );
     const [responseData] = await db.execute(
-      "select * from vehical where DID = ?",
+      "select * from vehicle where DID = ?",
       [userId]
     );
     for (let i = 0; i < responseData.length; i++) {
-      responseData[i].vehical_approved = vehical_approved[0].vehical_approved;
+      responseData[i].vehicle_approved = vehicle_approved[0].vehicle_approved;
     }
 
     response(res, 200, responseData);
@@ -210,8 +227,7 @@ export const getDriverSignupVehicalData = async (req, res) => {
   }
 };
 
-export const postDriverSignupVehicalData = async (req, res) => {
-  
+export const postDriverSignupvehicleData = async (req, res) => {
   const decoded = jwtDecode(req.cookies.accessToken);
   const userId = decoded.id;
   try {
@@ -226,7 +242,7 @@ export const postDriverSignupVehicalData = async (req, res) => {
     // console.log(req.files[0].url, req.files[1].url, req.files[2].url);
 
     const [responseData] = await db.execute(
-      "INSERT INTO `vehical`( `DID`, `capacity`, `type`, `colour`, `rc_book`, `insurance`, `puc`, `number_plate`, `puc_exp_date`, `insurance_exp_date`) VALUES (?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO `vehicle`( `DID`, `capacity`, `type`, `colour`, `rc_book`, `insurance`, `puc`, `number_plate`, `puc_exp_date`, `insurance_exp_date`) VALUES (?,?,?,?,?,?,?,?,?,?)",
       [
         userId,
         2,
@@ -242,7 +258,7 @@ export const postDriverSignupVehicalData = async (req, res) => {
     );
     // console.log(response);
     const [status_update] = await db.execute(
-      "update driver set vehical_approved=? where id = ?",
+      "update driver set vehicle_approved=? where id = ?",
       ["pending", userId]
     );
 
@@ -262,7 +278,7 @@ export const postDriverSignupVehicalData = async (req, res) => {
 
 export const postDriverSignupDocument = async (req, res) => {
   // console.log(req);
-    
+
   const decoded = jwtDecode(req.cookies.accessToken);
   const userId = decoded.id;
   console.log(req.file);

@@ -33,7 +33,7 @@
                 ></path>
               </svg>
             </div>
-            <div><p id="pickup-location">city center 2</p></div>
+            <div><p id="pickup-location"><%=source%></p></div>
             <div class="src-to-dst-line"></div>
           </div>
           <div class="dropoff-location ride-info-content">
@@ -49,7 +49,7 @@
               </svg>
             </div>
             <div class="trip-text-content"></div>
-            <div><p id="drop-location">silver radiance 2</p></div>
+            <div><p id="drop-location"><%=destination%></p></div>
           </div>
           <div class="ride-info-content">
             <div>
@@ -127,21 +127,21 @@
         }
 
         window.addEventListener("load", async () => {
-          try {
-            const response = await fetch("/uber/api/rider/get-directions");
-            if (response.status === 201) {
-              let data = await response.json();
-              console.log("directions", data.data[0][0].fare_amount);
-              document.getElementById("pickup-location").innerText = data.data[0][0].pickup_location;
-              document.getElementById("drop-location").innerText = data.data[0][0].drop_location;
-              document.getElementById("fare-amount").innerText = data.data[0][0].fare_amount;
-            } else {
-              location.href = "/uber/rider/go";
-            }
-          } catch (error) {
-            console.error("Error fetching directions:", error);
-            location.href = "/uber/rider/go";
-          }
+          // try {
+          //   const response = await fetch("/uber/api/rider/get-directions");
+          //   if (response.status === 201) {
+          //     let data = await response.json();
+          //     console.log("directions", data.data[0][0].fare_amount);
+          //     document.getElementById("pickup-location").innerText = data.data[0][0].pickup_location;
+          //     document.getElementById("drop-location").innerText = data.data[0][0].drop_location;
+          //     document.getElementById("fare-amount").innerText = data.data[0][0].fare_amount;
+          //   } else {
+          //     location.href = "/uber/rider/go";
+          //   }
+          // } catch (error) {
+          //   console.error("Error fetching directions:", error);
+          //   location.href = "/uber/rider/go";
+          // }
 
           
           startProgress();

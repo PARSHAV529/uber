@@ -46,7 +46,7 @@ document.getElementById("submit_btn").addEventListener("click", async () => {
     "insurance_Exp_date",
     document.getElementById("insurance_Exp_date").value
   );
-  // formData.append('document_vehical',[document.getElementById("popRc").files[0],document.getElementById("popPUC").files[0],document.getElementById("popInsurance").files[0]])
+  // formData.append('document_vehicle',[document.getElementById("popRc").files[0],document.getElementById("popPUC").files[0],document.getElementById("popInsurance").files[0]])
   // console.log(document.getElementById("popRc").files[0]);
 
   formData.append("RC_BOOK", document.getElementById("popRc").files[0]);
@@ -57,7 +57,7 @@ document.getElementById("submit_btn").addEventListener("click", async () => {
   );
 console.log(document.getElementById("PUC_Exp_date").value);
 
-  const res = await fetch("/postDriverSignupVehicalData", {
+  const res = await fetch("/postDriverSignupvehicleData", {
     method: "POST",
     body: formData,
   });
@@ -66,31 +66,31 @@ console.log(document.getElementById("PUC_Exp_date").value);
   if (res.ok) {
     location.reload();
     // document.getElementById(
-    //   "innerHTMLVehicalDocument"
+    //   "innerHTMLvehicleDocument"
     // ).innerHTML = `<h2>Document uploaded successfully</h2>
     //   <p>status : pending </p>`;
 
-    //   if (data[0].vehical_approved != "rejected") {
+    //   if (data[0].vehicle_approved != "rejected") {
     //     // let innerHTMLDocument = "";
     //     data.forEach((Document) => {
     //       document.getElementById(
-    //         "innerHTMLVehicalDocument"
+    //         "innerHTMLvehicleDocument"
     //       ).innerHTML += ` <div class="document_card">
-    //        <p>Vehical Details Status : ${Document.vehical_approved}</p>
-    //      <i class="fa-solid fa-circle-right " id='openpopupvehical'></i>
+    //        <p>vehicle Details Status : ${Document.vehicle_approved}</p>
+    //      <i class="fa-solid fa-circle-right " id='openpopupvehicle'></i>
 
     //      </div>`;
     //     });
 
-    //     // document.getElementById("innerHTMLDocumentvehical").innerHTML =
+    //     // document.getElementById("innerHTMLDocumentvehicle").innerHTML =
     //     //   innerHTMLDocument;
-    // document.getElementById('openpopupvehical')?.addEventListener('click',()=>{
-    //   document.getElementById('innerHTMLVehicalDocument')?.classList.remove('displaynone')
-    //   document.getElementById('innerHTMLVehicalDocument').style.display = 'flex'
+    // document.getElementById('openpopupvehicle')?.addEventListener('click',()=>{
+    //   document.getElementById('innerHTMLvehicleDocument')?.classList.remove('displaynone')
+    //   document.getElementById('innerHTMLvehicleDocument').style.display = 'flex'
     //   document.getElementById("main").classList.add("blurEffect");
     // })
     //     const ip = document
-    //       .getElementById("innerHTMLVehicalDocument")
+    //       .getElementById("innerHTMLvehicleDocument")
     //       ?.getElementsByTagName("input");
     //     const filenames = ["RC_BOOk", "Insurance", "PUC"];
     //     document.querySelectorAll(".custom-file-upload").forEach((file, i) => {
@@ -118,7 +118,7 @@ console.log(document.getElementById("PUC_Exp_date").value);
     //       file.replaceWith(img);
     //     });
     //     const select = document
-    //       .getElementById("innerHTMLVehicalDocument")
+    //       .getElementById("innerHTMLvehicleDocument")
     //       ?.getElementsByTagName("select");
 
     //     for (let j = 0; j < ip.length; j++) {
@@ -167,7 +167,7 @@ fetch("/getDocumentPageData")
         }`;
         console.log(btn.id.split("_")[2]);
 
-        if (btn.id.split("_")[0] !== "vehical") {
+        if (btn.id.split("_")[0] !== "vehicle") {
           const popupbox_btn_clone = ` <div class="popupbox-body">
           <label class="custom-file-upload">
             <input type="file" name="document" id="document" class="file" />
@@ -193,17 +193,19 @@ fetch("/getDocumentPageData")
                 pop.innerHTML += popupbox_btn_clone;
               })
             : null;
-          btn.id.split("_")[0] == "vehical" &&
+          btn.id.split("_")[0] == "vehicle" &&
             document.getElementById("upload")?.remove();
           const file = document.getElementById("document");
           file?.addEventListener("change", () => {
+            document.getElementById(btn.id.split("_")[0]).innerHTML= `upload`
+
             document.getElementById("image_preview").innerHTML = "";
             // for (let i = 0; i < this.files.length; i++) {
             let url = URL.createObjectURL(file.files[0]);
             let img;
             if (file.files[0].type.includes("image")) {
               img = document.createElement("img");
-            } else if (file.files[0].type.includes("pdf")) {
+            } else  {
               img = document.createElement("embed");
             }
 
@@ -224,6 +226,8 @@ fetch("/getDocumentPageData")
             .getElementById(btn.id.split("_")[0])
             ?.addEventListener("click", async () => {
               console.log(btn.id.split("_")[0]);
+              document.getElementById(btn.id.split("_")[0]).innerHTML= `upload`
+
               const formData = new FormData();
               formData.append(
                 "document",
@@ -234,6 +238,8 @@ fetch("/getDocumentPageData")
                 method: "POST",
                 body: formData,
               });
+              document.getElementById(btn.id.split("_")[0]).innerHTML= `<span class="loader"></span>`
+              document.getElementById("document")?.setAttribute('disabled', 'true');
               console.log(response);
               if (response.ok) {
                 // console.log(btn.parentElement)
@@ -252,6 +258,13 @@ fetch("/getDocumentPageData")
                 document.getElementById("main").classList.remove("blurEffect");
                 document.getElementById("image_preview").innerHTML =
                   '<img src="https://sgtbkhalsadu.ac.in/assets/front/images/dummy.jpg">';
+              }else{
+                console.log(response);
+                const data = await response.json();
+                console.log("data");
+                console.log(data);
+                document.getElementById(btn.id.split("_")[0]).innerHTML=data.error
+                document.getElementById("document")?.removeAttribute('disabled')
               }
             });
         } else {
@@ -366,43 +379,43 @@ fetch("/getDocumentPageData")
     });
   });
 
-fetch("/getVehicalDocumentData")
+fetch("/getvehicleDocumentData")
   .then((res) => res.json())
   .then(({ data }) => {
     console.log(data);
-console.log(data[0]?.vehical_approved);
-console.log(data[0]?.vehical_approved != "rejected" , data[0]?.vehical_approved != "undefined");
+console.log(data[0]?.vehicle_approved);
+console.log(data[0]?.vehicle_approved != "rejected" , data[0]?.vehicle_approved != "undefined");
 
-    if (data[0]?.vehical_approved != "rejected" && data[0]?.vehical_approved != undefined) {
-      console.log("data[0]?.vehical_approved");
+    if (data[0]?.vehicle_approved != "rejected" && data[0]?.vehicle_approved != undefined) {
+      console.log("data[0]?.vehicle_approved");
 
       let innerHTMLDocument = "";
       data.forEach((Document) => {
         innerHTMLDocument += ` <div class="document_card">
-         <p>Vehical Details Status : ${Document.vehical_approved}</p>
-       <i class="fa-solid fa-circle-right " id='openpopupvehical'></i>
+         <p>vehicle Details Status : ${Document.vehicle_approved}</p>
+       <i class="fa-solid fa-circle-right " id='openpopupvehicle'></i>
          
    
        </div>`;
       });
 
-      document.getElementById("innerHTMLDocumentvehical").innerHTML =
+      document.getElementById("innerHTMLDocumentvehicle").innerHTML =
         innerHTMLDocument;
       document
-        .getElementById("openpopupvehical")
+        .getElementById("openpopupvehicle")
         ?.addEventListener("click", () => {
           document
-            .getElementById("innerHTMLVehicalDocument")
+            .getElementById("innerHTMLvehicleDocument")
             ?.classList.remove("displaynone");
-          document.getElementById("innerHTMLVehicalDocument").style.display =
+          document.getElementById("innerHTMLvehicleDocument").style.display =
             "flex";
           document.getElementById("main").classList.add("blurEffect");
         });
       const ip = document
-        .getElementById("innerHTMLVehicalDocument")
+        .getElementById("innerHTMLvehicleDocument")
         ?.getElementsByTagName("input");
       const filenames = ["rc_book", "insurance", "puc"];
-      document.querySelectorAll(".custom-file-upload-Vehical").forEach((file, i) => {
+      document.querySelectorAll(".custom-file-upload-vehicle").forEach((file, i) => {
         // if (i == 0) {
         //   return;
         // }
@@ -441,7 +454,7 @@ console.log(data[0]?.vehical_approved != "rejected" , data[0]?.vehical_approved 
         // }
       });
       const select = document
-        .getElementById("innerHTMLVehicalDocument")
+        .getElementById("innerHTMLvehicleDocument")
         ?.getElementsByTagName("select");
 
       for (let j = 0; j < ip.length; j++) {

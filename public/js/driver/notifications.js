@@ -69,3 +69,11 @@ function popupNotification(ele) {
 function offPopupNotification() {
     document.getElementById("popupBackground").style.display = "none";
 }
+
+const profile = document.querySelector(".profile");
+profile.style.cursor = "pointer"
+
+  profile.addEventListener("click",(e)=>{
+    console.log(e.currentTarget);
+    location.href = '/driver/profile'
+  })

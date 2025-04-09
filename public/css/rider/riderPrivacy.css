@@ -101,15 +101,13 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
-    
   }
   .profile-content {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     gap: 2rem;
-    margin-left: 20%;
+    margin-left: 50%;
   }
   .header {
     font-size: 25px;
@@ -117,79 +115,72 @@ body {
     margin-bottom: -1%;
   }
   .sub-header {
-    font-size: 18px;
-    font-weight: bold;
-
-  }
-  #profile-pic{
-    max-width: 500px;
-    max-height: 200px;
-  }
-  #profile-header {
-    border-radius: 15px;
-  }
-  #profile-header img{
-    border-radius: 12px;
-  }
-  /* #pfp {
-    height: 80%;
-    width: 206%;
-  } */
-  #content {
-    border-radius: 15px;
-    
-  }
-  
-  #form {
-    font-family: Arial, sans-serif;
-  }
-  
-  #form label {
     font-size: 20px;
-    padding: 0%;
-    margin-bottom: 10%;
+    font-weight: bold;
   }
-  #form input {
-    font-size: 16px;
-    color: #484747;
-    border-radius: 6px;
-    min-width: 72.5%;
-    min-height: 35px;
-    margin-top: 10px;
-    border: 1px solid #bfbfbf;
-    padding: 1%;
-  }
-  #form button {
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-    width: auto;
-    font-size: 18px;
-    margin-top: 4%;
-    cursor: pointer;
-    padding: 15px 26px 15px 28px;
+  
+  .div1 {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 16px;
   }
 
-  #disconnect {
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-    width: auto;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 5px 18px 5px 18px;
+  .div2 {
+    display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-align: start;
+  align-items: flex-start;
+  gap: 8px;
   }
 
-  #otp {
-    visibility: visible;
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-    width: auto;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 15px 26px 15px 28px;
+  #content {
+    margin: 0;
+    max-width: 100%;
+  }
+  
+  .sub-text {
+    font-size: 20px;
+    margin-top: -2%;
+    color: #424141;
+  }
+  
+  .card-content {
+    display: grid;
+    gap: 16px;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(6, minmax(auto, 50vw));
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .card-div {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #F3F3F3;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    height: 249px;
+  }
+
+  button{
+    border-radius: 20px;
+  border: none;
+  padding: 5%;
+  font-size: 16px;
+  cursor: pointer;
   }

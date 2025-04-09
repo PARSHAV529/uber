@@ -12,7 +12,7 @@
   </style>
 </head>
 
-<body>
+<body onload="routeCheck()">
   <div class="container">
     <!-- Sidebar -->
     <%- include('riderSidebar')%>
@@ -28,12 +28,24 @@
               <table>
                 <tr>
                   <td>
-                    <input type="text" name="pickup" id="pickup" placeholder="Pickup Location">
+                    <div>
+                      <div>
+                        <input type="text" name="pickup" id="pickup" placeholder="Pickup Location">
+                      </div>
+                      <div id="source-suggestions" class="suggestions"></div>
+                    </div>
+                    
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" name="dropoff" id="dropoff" placeholder="Dropoff Location">
+                    <div>
+                      <div>
+                        <input type="text" name="dropoff" id="dropoff" placeholder="Dropoff Location">
+                      </div>
+                      <div id="destination-suggestions" class="suggestions"></div>
+                    </div>
+                   
                   </td>
                 </tr>
                 <tr>
@@ -45,12 +57,13 @@
             </form>
           </div>
           <div class="map">
-            <img
+            <img id="dashboardimg"
               src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_576,w_576/v1683919251/assets/42/a29147-e043-42f9-8544-ecfffe0532e9/original/travel-ilustra.png"
               alt="">
           </div>
         </div>
         <div class="history">
+          <h1>Recent History</h1>
           <table id="history-container"></table>
         </div>
         <div class="maincart">

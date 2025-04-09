@@ -1,5 +1,7 @@
 import db from "../config/dbConnection.js";
+import { hashSync, compareSync } from "bcrypt";
 import { response, errorResponse } from "../utils/helper.js";
+import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -36,7 +38,7 @@ export const postAdminLogin = async (req, res) => {
     if (login_credential.length > 0) {
       let hash = login_credential[0].password;
 
-      const login_flag = compareSync(password, hash);
+      const login_flag = bcrypt.compareSync(password, hash);
       // console.log(process.env.SECRETKEY);
       if (login_flag) {
         let token = jwt.sign(userPayload, process.env.SECRETKEY, {
@@ -156,7 +158,7 @@ export const driverRequest = async (req, res) => {
 
   try {
     const [driverRequests] = await db.query(`
-        select d.id as driver_id, u.first_name,u.last_name, u.email, d.document_status, d.created_at from uber_user as u join driver as d on u.id = d.user_id where d.document_status = 'pending'
+        select d.id as driver_id, u.first_name,u.last_name, u.email, d.document_status, d.created_at from uber_user as u join driver as d on u.id = d.user_id where d.document_status != 'approved' or d.vehicle_approved != 'approved'
           `);
     return response(
       res,
@@ -203,12 +205,15 @@ export const getOneDriverRequest = async (req, res) => {
     );
 
     const [documentList] = await db.query(
-      ` select docs.id as doc_id, docs.*, dlist.* from documents as docs join document_list as dlist on docs.document_id = dlist.id where docs.DID = ${driver_id}`
+      ` select docs.id as doc_id, docs.*, dlist.* from documents as docs join document_list as dlist on docs.document_id = dlist.id where docs.DID = ${driver_id} and dlist.id != 6`
     );
 
     const [vehicalDetails] = await db.query(
-      `select * from vehical where DID = ${driver_id}`
+      `select * from vehicle where DID = ${driver_id}`
     );
+
+    // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    // console.log(documentList);
 
     return response(
       res,
@@ -244,6 +249,7 @@ export const submitRejectDocument = async (req, res) => {
       200,
       {
         docDbResponse: docDbResponse,
+        span_text: "rejected",
       },
       "Document Rejected successfully"
     );
@@ -272,6 +278,7 @@ export const approveDocument = async (req, res) => {
       {
         docDbResponse: docDbResponse,
         notificationDbResponse: notificationDbResponse,
+        span_text: "approved",
       },
       "Document approved successfully"
     );
@@ -285,15 +292,16 @@ export const approveVehical = async (req, res) => {
   console.log("inside approveVehical");
   try {
     const [vehicalDbResponse] = await db.query(
-      `update driver set vehical_approved = 'approved' where id = ${req.body.driver_id}`
+      `update driver set vehicle_approved = 'approved' where id = ${req.body.driver_id}`
     );
     return response(
       res,
       200,
       {
         vehicalDbResponse: vehicalDbResponse,
+        span_text: "approved",
       },
-      "Vehical approved successfully"
+      "vehicle approved successfully"
     );
   } catch (err) {
     console.log(err);
@@ -305,15 +313,16 @@ export const rejectVehical = async (req, res) => {
   console.log("inside rejectVehical");
   try {
     const [vehicalDbResponse] = await db.query(
-      `update driver set vehical_approved = 'rejected' where id = ${req.body.driver_id}`
+      `update driver set vehicle_approved = 'rejected' where id = ${req.body.driver_id}`
     );
     return response(
       res,
       200,
       {
         vehicalDbResponse: vehicalDbResponse,
+        span_text: "rejected",
       },
-      "Vehical rejected successfully"
+      "vehicle rejected successfully"
     );
   } catch (err) {
     console.log(err);
@@ -329,13 +338,13 @@ export const driverRequestFinalSubmit = async (req, res) => {
   let document_approval_arr = [];
   let mailOptions;
 
-  if (req.body.vehical_remark) {
+  if (req.body.vehical_remark != null) {
     vehical_approval_status = false;
   }
 
   try {
     const [docDbResponse] = await db.query(`
-    select * from document_list as dl join documents as d on dl.id = d.document_id where d.DID = ${req.body.driver_id}`);
+    select * from document_list as dl join documents as d on dl.id = d.document_id where d.DID = ${req.body.driver_id} and dl.id != 6`);
 
     docDbResponse.forEach((e) => {
       if (e.is_approved !== "approved") {
@@ -350,7 +359,7 @@ export const driverRequestFinalSubmit = async (req, res) => {
 
     if (vehical_approval_status && document_approval_status) {
       const [driverDbResponse] = await db.query(
-        `update driver set document_status = 'approved' , vehical_approved = 'approved' where id = ${req.body.driver_id}`
+        `update driver set document_status = 'approved' , vehicle_approved = 'approved' where id = ${req.body.driver_id}`
       );
       mailOptions = {
         from: process.env.EMAIL,
@@ -373,7 +382,7 @@ export const driverRequestFinalSubmit = async (req, res) => {
       };
     } else if (!vehical_approval_status && !document_approval_status) {
       const [driverDbResponse] = await db.query(
-        `update driver set document_status = 'rejected' , vehiacl_approved = 'rejected' where id = ${req.body.driver_id}`
+        `update driver set document_status = 'rejected' , vehicle_approved = 'rejected' where id = ${req.body.driver_id}`
       );
       mailOptions = {
         from: process.env.EMAIL,
@@ -397,7 +406,7 @@ export const driverRequestFinalSubmit = async (req, res) => {
       };
     } else if (!vehical_approval_status && document_approval_status) {
       const [driverDbResponse] = await db.query(
-        `update driver set document_status = 'approved' , vehiacl_approved = 'rejected' where id = ${req.body.driver_id}`
+        `update driver set document_status = 'approved' , vehicle_approved = 'rejected' where id = ${req.body.driver_id}`
       );
       mailOptions = {
         from: process.env.EMAIL,
@@ -421,7 +430,7 @@ export const driverRequestFinalSubmit = async (req, res) => {
       };
     } else if (vehical_approval_status && !document_approval_status) {
       const [driverDbResponse] = await db.query(
-        `update driver set document_status = 'rejected' , vehiacl_approved = 'approved' where id = ${req.body.driver_id}`
+        `update driver set document_status = 'rejected' , vehicle_approved = 'approved' where id = ${req.body.driver_id}`
       );
       mailOptions = {
         from: process.env.EMAIL,
@@ -594,11 +603,15 @@ export const getDriverDetails = async (req, res) => {
     );
 
     const [vehicalDetails] = await db.query(
-      `SELECT * FROM vehical WHERE DID = ${driver_id}`
+      `SELECT * FROM vehicle WHERE DID = ${driver_id}`
     );
 
     const [totalRides] = await db.query(
       `SELECT COUNT(*) AS totalRides FROM trip WHERE DID = ${driver_id}`
+    );
+
+    const [topPerformingDriversList] = await db.query(
+      `SELECT d.id AS driver_id, ROUND(AVG(t.rating_count), 1) AS rating, COUNT(t.id) AS completed_rides, SUM(t.fare_amount) AS earning FROM driver AS d JOIN trip AS t ON d.id = t.DID  WHERE t.status = 'completed' AND d.id = ${driver_id} GROUP BY d.id ORDER BY rating;`
     );
 
     return response(
@@ -608,6 +621,7 @@ export const getDriverDetails = async (req, res) => {
         driver_details: driver_details,
         vehicalDetails: vehicalDetails,
         totalRides: totalRides,
+        topPerformingDriversList: topPerformingDriversList,
       },
       "data of driver request fetched successfully"
     );

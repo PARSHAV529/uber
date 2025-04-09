@@ -22,8 +22,9 @@
         <div id="heading">
           <h2>Driver Profile</h2>
         </div>
-        <div>
+        <div id="profile-image">
           <img src="" alt="" id="driver_pfp" />
+          <label for="edit_pfp"> Select profile picture</label class=".custom-file-upload">
           <input type="file" name="document" id="edit_pfp">
         </div>
         <div id="section2">
@@ -51,16 +52,10 @@
             </div>
 
             <div class="inputFildes">
-              <div onclick="javscript:location.href='/uploadDocument'">
+              <div onclick="javscript:location.href='/uploadDocument'" class="docs">
                 See Your Documents 
               </div>
               </div>
-            <!-- <div class="inputFildes">
-              <label for="address">Address</label>
-              <span class="ip_icon">
-                <input type="text" name="address" id="address" />
-                <i class="fa-solid fa-house"></i>              </span>
-            </div> -->
           </div>
           <button id="update_profile">Save Changes</button>
         </div>

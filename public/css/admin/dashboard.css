@@ -24,12 +24,6 @@ body {
     margin-left: 250px;
 }
 
-.chart-container {
-    
-}
-
-
-
 .main-content h4 {
     margin: 30px 0 30px 0;
 }
@@ -95,38 +89,40 @@ body {
 
 .tabs {
     display: flex;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #f4f4f4;
     margin-bottom: 20px;
   }
-  .tabs a {
+  
+.tabs a {
     padding: 10px 20px;
     text-decoration: none;
     color: #000000;
     border-bottom: 2px solid transparent;
     cursor: pointer;
-  }
+}
 
-  .tabs a.active {
+.tabs a.active {
     cursor: pointer;
-    border-bottom: 2px solid #000000;
-  }
+    font-weight: 700;
+    border-bottom: 2px solid black;
+}
 
-  .filter{
+.filter{
     display: flex;
     justify-content: space-between;
-  }
-  #customRangeFrom{
+}
+#customRangeFrom{
     display: flex;
     gap: 20px;
-  }
-  .custom-range-form-div{
-      display: flex;
+}
+.custom-range-form-div{
+    display: flex;
     padding: 0 10px 0 0;
     gap: 10px;
 
-  }
+}
 
-  #customRangeFrom  input[type='date']{
+#customRangeFrom  input[type='date']{
     border :1px solid #000000;
     padding: 2px;
     border-radius: 3px;
@@ -178,7 +174,7 @@ body {
 
 .pagination{
     width: 30%;
-    padding-left: 15%;
+    padding-left: 5%;
     padding-right: 0;
 }
 
@@ -256,4 +252,24 @@ body {
 
 .activity-action:hover {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.pending{
+    color: orange;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.approved{
+    color:darkgreen;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.rejected{
+    color: darkred;
+    font-weight: bold;
+    font-style: italic;
 }

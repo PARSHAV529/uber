@@ -2,29 +2,64 @@ import nodemailer from "nodemailer";
 import crypto from "crypto";
 import db from "../config/dbConnection.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import { response, errorResponse } from "../utils/helper.js";
+import { generateToken } from "../utils/generateToken.js";
 
 export const loginUser = async (req, res) => {
-  try { 
+  try {
+    console.log(req.body);
+    
     const { email, password } = req.body;
 
     const [hashedPassword] = await db.query(
       `select password from uber_user where email='${email}'`
     );
+console.log(hashedPassword);
+
     const pwd = await bcrypt.compare(password, hashedPassword[0].password);
 
+    console.log(pwd)
     if (pwd) {
       const query = `select * from uber_user where email='${email}' and password='${hashedPassword[0].password}'`;
       const [data] = await db.query(query);
+
+      console.log(data)
+      const [d_id] = await db.query(
+        `select id from driver where user_id='${data[0].id}'`
+      );
+      console.log(d_id[0]);
       if (data[0]) {
+
+        let token = generateToken(data[0],req.cookies.user_role)
+
+        console.log("token",token)
+        return response(res, 200, data[0], "User Login Successfully");
+        const accessToken = jwt.sign(
+          {
+            id: d_id[0].id > 0 ? d_id[0].id : data[0].id,
+            fname: data[0].first_name,
+            lname: data[0].last_name,
+            phNo: data[0].phone_no,
+            email: email,
+          },
+          process.env.JWT_SECRET_KEY
+        );
+        res.cookie("accessToken", accessToken, {
+          httpOnly: true,
+        });
         response(res, 200, data[0], "User Login Successfully");
       } else {
-        errorResponse(res, 400, "Email id & Password not matched");
+        return errorResponse(res, 400, "Email id & Password not matched");
       }
+    }else{
+      return errorResponse(res,400,"Email id & Password not matched")
     }
   } catch (err) {
-    errorResponse(res, 500, "Internal server error");
+    console.log(err);
+    
+    return errorResponse(res, 500, "Internal server error");
   }
 };
 

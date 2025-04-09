@@ -11,23 +11,12 @@ body {
 .sidebar {
   background-color: #f4f4f4;
   width: 250px;
-  height: 100%;
+  height: calc(100% - 40px);
   padding: 20px;
   position: fixed;
   top: 0;
 }
-.otherContent{
-  margin: 2rem 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  /* width: 100%; */
-  margin-left: 18rem;
-  /* position: relative; */
-  /* left: 10rem; */
-  /* width: calc(100vh-200px-20px); */
-}
+
 .sidebar .header {
   display: flex;
   align-items: center;
@@ -66,6 +55,7 @@ body {
 }
 
 .sidebar .profile {
+  cursor: pointer;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -152,7 +142,7 @@ body {
   cursor: pointer;
 }
 
-.monthly-summary {
+.monthly-summary,.daily-summary {
   margin-top: 40px;
 }
 
@@ -160,6 +150,24 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+}
+
+.daily-summary .summary-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.daily-summary .summary-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .daily-summary .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (min-width: 768px) {

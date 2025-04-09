@@ -51,3 +51,11 @@ document
         };
       
   })
+  
+const profile = document.querySelector(".profile");
+profile.style.cursor = "pointer"
+  profile.addEventListener("click",(e)=>{
+    console.log(e.currentTarget);
+    location.href = '/driver/profile'
+  })
+  

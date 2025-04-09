@@ -13,7 +13,7 @@
   <body>
     <div class="container">
       <%- include('riderSidebar')%>
-      <div class="sidebar">
+      <!-- <div class="sidebar">
         <div class="heading">
           <i class="fas fa-bars"></i>
           <span>Uber</span>
@@ -51,7 +51,7 @@
           <img src="https://placehold.co/40x40" alt="User profile picture" />
           <div><p>John Rider</p></div>
         </div>
-      </div>
+      </div> -->
 
       <div class="wrapper">
         <div class="main-content">
@@ -178,16 +178,8 @@
         </div>
       </div>
     </div>
-    <script src="https://www.unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
-    <script>
-      let mapInstance,
-        olaMapsInstance,
-        driverMarker,
-        routePolyline = [];
-      let sourceCoords, destCoords;
-      let currentDriverIndex = 0;
-      let trackingInterval;
 
+    <script src="/js/rider/riderRideAccepted.js">
       const olaMaps = new OlaMaps({
         apiKey: "jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz",
       });
@@ -363,7 +355,7 @@
 
       function startLiveTracking() {
         clearInterval(trackingInterval);
-        trackingInterval = setInterval(updateDriverPosition, 2000); // Update every 2 seconds
+        trackingInterval = setInterval(updateDriverPosition, 2000);
       }
 
       window.addEventListener("load", async () => {

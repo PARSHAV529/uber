@@ -10,7 +10,9 @@ body {
   display: flex;
 }
 .wrapper {
-  width: 100%;
+  position: relative;
+  left: 20%;
+  width: 80%;
   height: 100%;
   display: flex;
   gap: 1rem;
@@ -29,6 +31,7 @@ body {
   padding: 2rem;
 }
 fieldset {
+  
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -37,13 +40,14 @@ fieldset {
   margin: 10px;
 }
 .select-location {
+  
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 .main-map {
-	width: 51%;
+	width: 60%;
 	height: 100dvh;
 	display: flex;
 	align-items: center;
@@ -86,7 +90,7 @@ fieldset {
   justify-content: center;
   gap: 5px;
 }
-input {
+.inputs {
   width: 100%;
   font-size: 16px;
   line-height: 24px;
@@ -101,6 +105,7 @@ input {
   border: 2px solid black;
 }
 .select-location-fields {
+  
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -182,92 +187,6 @@ input {
   background-color: #ffff;
   font-size: 15px;
   cursor: pointer;
-}
-.sidebar {
-  background-color: #f4f4f4;
-  width: 14%;
-  padding: 20px;
-  position: relative;
-}
-.sidebar .header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-}
-.sidebar .header i {
-  color: #6b7280;
-  margin-right: 10px;
-}
-.sidebar .header span {
-  font-size: 20px;
-  font-weight: bold;
-}
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar nav ul li {
-  margin-bottom: 20px;
-}
-.sidebar nav ul li a {
-  display: flex;
-  align-items: center;
-  color: #374151;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 8px;
-}
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-  background-color: #e0f2fe;
-  color: #000000;
-}
-.sidebar nav ul li a i {
-  margin-right: 10px;
-}
-.sidebar .profile {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-}
-.sidebar .profile img {
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.sidebar .profile p {
-  margin: 0;
-}
-.sidebar .profile .status {
-  color: #10b981;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  z-index: 1;
-  margin-left: 107px;
-  margin-top: -39px;
-  width: 163px;
-}
-
-.dropdown a {
-  display: block;
-  padding: 10px 20px;
-  color: black;
-  text-decoration: none;
-}
-
-.dropdown a:hover {
-  background-color: #f0f0f0;
-}
-
-.show {
-  display: block;
 }
 
 /* .loader {

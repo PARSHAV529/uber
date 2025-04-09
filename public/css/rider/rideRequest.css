@@ -61,14 +61,14 @@ body {
   border-radius: 12px;
 }
 
-/* .src-to-dst-line {
+.src-to-dst-line {
   position: absolute;
   background-color: black;
   top: 52%;
   width: 2px;
   height: 130%;
-  left: 2.3%;
-} */
+  left: 2.0%;
+}
 
 /* Modal styles */
 .modal {
@@ -128,9 +128,6 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
-
-
 
 
 .progress-container {

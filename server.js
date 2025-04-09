@@ -10,7 +10,7 @@ const app = express();
 const __dirname = path.resolve();
 
 //middlewares
-app.set("view engine", "ejs");
+app.set("view engine", "ejs")
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -73,7 +73,13 @@ app.get("/uber/admin/reports", (req, res) => {
   res.render("admin/reports");
 });
 
+// app.get("/uber/admin/doc-verification", (req, res) => {
+//   res.render("admin/docVerification");
+// });
+
 app.get("/uber/admin/doc-verification", (req, res) => {
+  // res.send(`admin/docVerification ${req.params.driver_id}}`);
+
   res.render("admin/docVerification");
 });
 
@@ -86,6 +92,7 @@ app.get("/uber/admin/driver-detail", (req, res) => {
 });
 
 import { router } from "./routes/auth.route.js";
+import db from "./config/dbConnection.js";
 app.use("/uber/api", router);
 
 //render your frontend page here
@@ -96,7 +103,8 @@ app.get("/uber/rider/go/:start?/:dest?", (req, res) => {
 
 //waiting for driver to accept ride request page
 app.get("/uber/rider/request", (req, res) => {
-  res.render("rider/rideRequest");
+  console.log(req.query);
+  res.render("rider/rideRequest",{source:req.query.source,destination:req.query.destination});
 });
 //rider rides history page
 app.get("/uber/rider/history", (req, res) => {
@@ -110,7 +118,12 @@ app.get("/uber/rider/profile", (req, res) => {
 
 //rider security
 app.get("/uber/rider/security", (req, res) => {
-  res.render("riderSecurity");
+  res.render("rider/riderSecurity");
+});
+
+//rider privacy
+app.get("/uber/rider/privacy", (req, res) => {
+  res.render("rider/riderPrivacy");
 });
 
 //rider's ride request accepted and will se driver details here
@@ -149,10 +162,6 @@ app.use(
 
 app.use("/", driverSignupRouter);
 
-// app.get("/diverLandingPage", (req, res) => {
-//   res.render("driver/driverLandingPage");
-// });
-
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -178,6 +187,9 @@ app.get("/forgot-password", (req, res) => {
 });
 app.get("/driver/home", (req, res) => {
   res.render("driver/home");
+});
+app.get("/driver/hometemp", (req, res) => {
+  res.render("driver/homeTemp");
 });
 app.get("/driver", (req, res) => {
   res.render("driver/driverLandingPage");
@@ -231,10 +243,10 @@ io.on("connection", (socket) => {
   //   console.log("user disconnected");
   // });
   let count=0;
-  socket.on('update-driver-location', (data) => {
+  socket.on('update-driver-location', async(data) => {
     console.log(data)
     console.log(count++);
-    
+    // await db.execute('', [data.lat, data.lng]);
     io.emit('driver-location', data)
   }
   );

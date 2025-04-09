@@ -329,8 +329,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // sidebar.style.width = "10%";
-    mainMap.style.width = "35%%";
-    mainContent.style.width = "65%";
+    // mainMap.style.width = "50%";
+    // mainContent.style.width = "50%";
 
     content.classList.remove("hidden");
     header.classList.remove("hidden");
@@ -411,7 +411,7 @@ requestRide.addEventListener("click", async () => {
     let data = await response.json();
     console.log(data.message);
 
-    location.href = "/uber/rider/request";
+    location.href = `/uber/rider/request?source=${source}&destination=${destination}`;
   } else {
     let data = await response.json();
     console.log(data.message);
