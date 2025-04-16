@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uber-Go</title>
+    <link rel="stylesheet" href="/css/rider/riderRideAccepted.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script
+    src="https://apis.mapmyindia.com/advancedmaps/api/43c2fc7cb353b21531b0f2d76c25a0af/map_sdk?layer=vector&v=2.0&callback=initMap1"
+    defer async></script> -->
+  </head>
+  <body>
+    <div class="container">
+      <%- include('riderSidebar')%>
+
+      <div class="wrapper">
+        <div class="main-content">
+          <div class="driver-info">
+            <div class="header"><p>Driver Information</p></div>
+            <div><i class="fa-regular fa-user"></i></div>
+            <div>
+              <p id="driver-name"></p>
+              <p class="fade-color" id="vehicle-info"></p>
+            </div>
+            <div class="buttons">
+              <button id="call-btn">Call Driver</button>
+            </div>
+          </div>
+          <div class="trip-info">
+            <div class="header"><p>Trip Information</p></div>
+            <div class="trip-info-content">
+              <div>
+                <div><i class="fa-solid fa-location-dot"></i></div>
+                <div class="trip-text-content">
+                  <span>Pickup</span>
+                  <span class="fade-color" id="pickup-location"></span>
+                </div>
+              </div>
+              <div>
+                <div><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="trip-text-content">
+                  <span>Destination</span>
+                  <span class="fade-color" id="drop-location"></span>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <img
+                    alt="payment-method"
+                    height="20px"
+                    src="/source/credit.png"
+                  />
+                </div>
+                <div class="trip-text-content">
+                  <span>Payment Method</span>
+                  <span class="fade-color">Cash</span>
+                </div>
+              </div>
+            </div>
+            <div class="ride-otp">
+              <div><p>OTP:</p></div>
+              <div class="otp">
+                <span id="otp-text"></span>
+                <i
+                  class="fa-regular fa-copy copy-btn"
+                  style="font-size: 22px"
+                ></i>
+              </div>
+            </div>
+            <div class="trip-buttons">
+              <button id="cancel-ride-btn">Cancel Ride</button>
+            </div>
+          </div>
+
+          <!-- Modal for cancel reason -->
+          <div id="cancelRideModal" class="modal">
+            <div class="modal-content">
+              <span class="close-modal" id="closeModal">×</span>
+              <h2>Why are you canceling your ride?</h2>
+              <form id="cancelReasonForm">
+                <select id="cancelReason" name="reason" required>
+                  <option value="" disabled selected>Select a reason</option>
+                  <option value="changed_mind">Changed my mind</option>
+                  <option value="driver_delay">Driver delay</option>
+                  <option value="wrong_destination">Wrong destination</option>
+                  <option value="other">Other</option>
+                </select>
+                <textarea
+                  id="otherReason"
+                  name="otherReason"
+                  placeholder="Please specify (optional)"
+                  style="display: none"
+                ></textarea>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="reviewRideModal">
+          <div class="review-content">
+            <div>
+              <span class="close-review-modal" id="closeReviewModal">×</span>
+            </div>
+            <h2>Share your ride experience</h2>
+            <div class="rating">
+              <i
+                class="fa-regular fa-face-angry rate"
+                style="color: rgb(224, 15, 15)"
+                data-value="1"
+              ></i>
+              <i
+                class="fa-regular fa-face-frown rate"
+                style="color: rgb(219, 68, 93)"
+                data-value="2"
+              ></i>
+              <i
+                class="fa-regular fa-face-meh rate"
+                style="color: rgb(146, 146, 34)"
+                data-value="3"
+              ></i>
+              <i
+                class="fa-regular fa-face-smile rate"
+                style="color: rgb(8, 184, 8)"
+                data-value="4"
+              ></i>
+              <i
+                class="fa-solid fa-face-laugh-beam rate"
+                style="color: rgb(2, 63, 2)"
+                data-value="5"
+              ></i>
+            </div>
+            <div><button class="rate-btn">Submit</button></div>
+          </div>
+        </div>
+        <div class="main-map">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="/js/rider/riderRideAccepted.js"></script>
+  </body>
+</html>

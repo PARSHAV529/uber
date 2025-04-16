@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security</title>
+    <link rel="stylesheet" href="/css/rider/riderSecurity.css" />
+    <script
+      src="https://kit.fontawesome.com/7ed32dcceb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="header">
+          
+          <span>Uber</span>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/" id="home">
+                <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li>
+              <a href="/uber/rider/profile" id="account">
+                <i class="fas fa-user"></i>Account</a>
+            </li>
+            <li>
+              <a href="/uber/rider/security" class="active" id="security">
+                <i class="fas fa-lock"></i>Security</a>
+            </li>
+            <li>
+              <a href="/uber/rider/privacy" id="privacy">
+                <i class="fas fa-info-circle"></i>Privacy & Data</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="main">
+        <div class="profile-content">
+          <div class="header"><p>Security</p></div>
+          <div id="content">
+            <div ><p class="sub-header">Logging in to Uber</p>
+              <div class="div1">
+                <div><p class="sub-text">Password</p></div>
+                <div><button class="password" id="password">Change Password</button></div>
+              </div>
+            </div>
+            <br><br>
+            <div><p class="sub-header">Connected Social Apps</p>
+                <div class="div1">
+                  <div><p class="sub-text">Google</p></div>
+                  <div><button class="disconnect" id="disconnect">Disconnect</button></div>
+                </div>
+            </div>
+          </div>
+          <br><br><br>
+          <button id="logout" class="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/rider/riderSecurity.js"></script>
+  </body>
+</html>

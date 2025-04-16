@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Driver Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/admin/adminDriverProfile.css" />
+  </head>
+  <body onload="routeCheck()">
+    <div class="container">
+      <!-- Sidebar -->
+
+      <%- include('adminSider')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <h3>
+          <a
+            style="text-decoration: none !important; color: black"
+            href="/uber/admin/users"
+            >Users
+          </a>
+          &nbsp; &gt; &nbsp; Driver Profile
+        </h3>
+
+        <div class="profile-con-container">
+          <div class="profile-container">
+            <div class="upper">
+              <div class="upper-left">
+                <div class="image-cotainer">
+                  <img
+                    src=""
+                    alt=""
+                    id="driver-profile-img"
+                    width="100px"
+                    height="100px"
+                  />
+                </div>
+              </div>
+
+              <div class="upper-right">
+                <h1 class="driver-name" id="driver-name"></h1>
+
+                <!-- <span>ratings: </span> -->
+                <div class="rating">
+                  <div class="star-rating" id="star-rating"></div>
+                  <h4 class="rating-count" id="rating-count"></h4>
+                </div>
+
+                <div class="ride-details">
+                  <div class="total-rides">
+                    <h4 id="total-ride-count"></h4>
+                    <span>Total rides</span>
+                  </div>
+
+                  <div class="completed-rides">
+                    <h4 id="completed-ride-count"></h4>
+                    <span>Completed rides</span>
+                  </div>
+
+                  <div class="earning">
+                    <h4 id="earning-count"></h4>
+                    <span>Earnings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lower">
+              <div class="tabs">
+                <button
+                  class="tab active-tab"
+                  onclick="setTabs(event)"
+                  id="tabs"
+                  value="basic"
+                >
+                  Basic Details
+                </button>
+
+                <button
+                  class="tab"
+                  onclick="setTabs(event)"
+                  id="tabs"
+                  value="vehicle"
+                >
+                  Vehicle Details
+                </button>
+              </div>
+
+              <div class="lower-left" id="lower-left">
+                <div>
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="vehicle-type">Vehicle Type</label>
+                      <input id="vehicle-type" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="vehical-approved">Vehicle Approved</label>
+                      <input id="vehical-approved" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="capacity">Capacity</label>
+                      <input id="capacity" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="colour">Colour</label>
+                      <input id="colour" type="text" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="insurance-exp-date"
+                        >Insurance Expiry Date</label
+                      >
+                      <input id="insurance-exp-date" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="number-plate">Number Plate</label>
+                      <input id="number-plate" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="puc-exp-date">PUC Expiry Date</label>
+                      <input id="puc-exp-date" type="text" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lower-right" id="lower-right">
+                <div>
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="DOB">DOB</label>
+                      <input id="DOB" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="driver-email">Email</label>
+                      <input id="driver-email" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="document-status">Document Status</label>
+                      <input id="document-status" type="text" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="phone-number">Phone Number</label>
+                      <input id="phone-number" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="dl-number">Driving Licence Number</label>
+                      <input id="dl-number" type="text" disabled />
+                    </div>
+                  </div>
+
+                  <div class="left-div-el">
+                    <div class="google-style-input">
+                      <label for="dl-exp-date"
+                        >Driving Licence Expiry Date</label
+                      >
+                      <input id="dl-exp-date" type="text" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/admin/adminDriverProfile.js"></script>
+  </body>
+</html>

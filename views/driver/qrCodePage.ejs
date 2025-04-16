@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Example</title>
+  </head>
+  <body onload="generateQr()">
+    <h1>Generated QR Code</h1>
+    <img src="<%= qrCodeImage %>" alt="QR Code" />
+    <div id="qrImage"></div>
+  </body>
+
+  <!-- <script>
+    async function generateQr() {
+      let response = await fetch(`uber/api/generate-qr-code`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      response = response.json();
+    }
+    document.getElementById("");
+  </script> -->
+</html>

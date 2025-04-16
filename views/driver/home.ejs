@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/driver/driverDashboard.css" />
+    <link rel="stylesheet" href="/css/driver/driverHistory.css" />
+    <script src="https://www.unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
+  </head>
+  <body onload="getNotificationcnt()">
+
+    <div class="container">
+      <%- include('../includes/driverSidebar.ejs') %>
+      <div class="driver-dashboard-body">
+        <div class="daily-summary">
+          <h2>Driver Dashboard</h2>
+          <div class="summary-cards">
+            <div class="summary-card">
+              <i><img src="/source/dollar-symbol.png" alt="" /></i>
+              <h3>Today's Earnings</h3>
+              <h2 id="day-earning">$875.50</h2>
+            </div>
+            <div class="summary-card">
+              <i><img src="/source/checked.png" alt="" /></i>
+              <h3>Completed Rides</h3>
+              <h2 id="completed-rides">8 Rides</h2>
+            </div>
+            <div class="summary-card">
+              <i><img src="/source/clock.png" alt="" /></i>
+              <h3>Driving Hours</h3>
+              <h2 id="working-hours"></h2>
+            </div>
+          </div>
+
+          <h3>Current Status</h3>
+          <div class="current-status">
+            <div class="status-box-online" id="box-online">
+              <img src="/source/power-button.png" alt="" />
+              <h2>You're Online</h2>
+              <h4>Tap to go offline</h4>
+              <button onclick="changeStatus('offline')">Go Offline</button>
+            </div>
+            <div class="status-box-offline" id="box-offline">
+              <img src="/source/power-button.png" alt="" />
+              <h2>You're Offline</h2>
+              <h4>Tap to go Online</h4>
+              <button onclick="changeStatus('online')">Go Online</button>
+            </div>
+          </div>
+
+          <h3>Recent Activity</h3>
+          <div class="recent-rides" id="recent-rides"></div>
+
+          <div class="map" id="map"></div>
+          <button id="btnStart">Start Driving</button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/js/driver/driverDashboard.js"></script>
+    <!-- <script src="/js/driver/driverDashboardTesting.js"></script> -->
+
+    <!-- <script src="/js/driver/home.js"></script> -->
+    <script src="/js/sidebar.js"></script>
+  </body>
+</html>

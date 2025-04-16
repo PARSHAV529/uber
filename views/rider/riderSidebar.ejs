@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/rider/riderSidebar.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="header">
+        <i class="fas fa-bars"></i>
+        <span style="font-size: 22px; font-weight: bold">Uber</span>
+      </div>
+      <!-- <div id="bar"></div> -->
+      <nav>
+        <ul>
+          <li>
+            <a
+              href="/"
+              id="Home"
+              class="defaultClass"
+              onclick="addActiveClass(event)"
+              ><i class="fas fa-home"></i> Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="/uber/rider/go"
+              id="Home"
+              class="defaultClass"
+              onclick="addActiveClass(event)"
+              ><i class="fa-solid fa-taxi"></i></i> Get Ride</a
+            >
+          </li>
+          <li>
+            <a
+              href="/uber/rider/history"
+              id="Rides"
+              class="defaultClass"
+              onclick="addActiveClass(event)"
+              ><i class="fas fa-history"></i> Activity</a
+            >
+          </li>
+          <li>
+            <a
+              href="/uber/driver"
+              id="Payments"
+              class="defaultClass"
+              onclick="addActiveClass(event)"
+              ><i class="fas fa-wallet"></i> Driver</a
+            >
+          </li>
+          <li>
+            <a
+              href="javascript:void(0);"
+              id="About"
+              class="defaultClass"
+              onclick="addActiveClass(event)"
+              aria-expanded="false"
+              ><i class="fa fa-info-circle" aria-hidden="true"></i> About</a
+            >
+
+            <!-- <div class="dropdown" id="aboutDropdown">
+              <a href=""> About Us</a>
+              <a href="">Blogs</a>
+              <a href="">Our Offers</a>
+            </div> -->
+          </li>
+          <!-- <li>
+            <a href="#" id="Settings"><i class="fas fa-cog"></i> Settings</a>
+          </li> -->
+        </ul>
+      </nav>
+      <div class="profile" id="profile">
+        <img
+          src="https://placehold.co/40x40"
+          alt="User profile picture"
+          id="userpfp"
+          class="userpfp"
+        />
+        <div>
+          <!-- rider does not have status -->
+          <p id="username" class="username"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const links = document.querySelectorAll(".defaultClass");
+
+        links.forEach((link) => {
+          if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+          }
+
+          // Update click handler
+          link.addEventListener("click", function (event) {
+            links.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      });
+    </script>
+    <script src="/js/rider/riderSidebar.js"></script>
+  </body>
+</html>

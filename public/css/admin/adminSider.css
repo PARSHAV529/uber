@@ -1,0 +1,104 @@
+/* ..........admin-sidebar................. */
+
+.admin-sidebar {
+    background-color: black;
+    width: 250px;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.admin-sidebar .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 10px;
+}
+
+.admin-sidebar .header span{
+    color: #ffffff;
+}
+
+.admin-sidebar .header i {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+/* .admin-sidebar .header img{
+    height: 50px;
+    width: 90px;
+    background-color: black;
+    padding: 10px;
+} */
+
+.admin-sidebar .header span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-sidebar nav ul li {
+    margin-bottom: 20px;
+}
+
+.admin-sidebar nav ul li a {
+    display: flex;
+    font-size: 17px;
+    align-items: center;
+    color: #a8b0bd;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.admin-sidebar nav ul li a:hover,
+.admin-sidebar nav ul li a.active {
+    background-color: #e0f2fe;
+    color: #000000;
+}
+
+.admin-sidebar nav ul li a i {
+    margin-right: 10px;
+}
+
+.admin-sidebar .profile {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.admin-sidebar .profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+.admin-sidebar .profile p {
+    color: #a8b0bd;;
+    margin: 0;
+}
+
+.admin-sidebar .profile .status {
+    color: #10b981;
+}
+
+
+.logout{
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.logout:hover{
+    font-size: 27px;
+}

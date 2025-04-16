@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: black;
+    padding: 15px 30px;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar img {
+    height: 30px;
+    width: 90px;
+}
+
+.admin-login-container {
+    height: calc(100vh - 90px);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 10px 0 10px 12px;
+    border-radius: 8px;
+    background-color: #eee;
+    border: 2px solid transparent;
+    line-height: 24px;
+    margin: 8px 0px;
+    font-size: 16px;
+}
+
+.password-container {
+    width: 100%;
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-login-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 0 10px 12px;
+    width: 100%;
+    margin: 8px 0px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    line-height: 24px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.admin-login-btn:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/admin/dashboard.css" />
+    <style>
+      .top-performer-container {
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 0 15px;
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+
+  <body onload="routeCheck()">
+    <div class="container">
+      <!-- Sidebar -->
+
+      <%- include('adminSider')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <h3>Reports</h3>
+
+        <h4>Payment Overview</h4>
+        <div class="key-metrics-container">
+          <div class="key-metrics-card">
+            <div class="avtar"><i class="fa-solid fa-money-bill"></i></div>
+            <p>Total Revenue</p>
+            <span id="total-revenue"></span>
+            <!-- <button>View Details</button> -->
+          </div>
+          <div class="key-metrics-card">
+            <div class="avtar">
+              <i class="fa fa-exchange" aria-hidden="true"></i>
+            </div>
+            <p>Total Transactions</p>
+            <span id="total-transactions-count"></span>
+            <!-- <button>View Details</button> -->
+          </div>
+
+          <div class="key-metrics-card">
+            <div class="avtar">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <p>Failed Transactions</p>
+            <span id="total-failed-transactions-count"></span>
+            <!-- <button>View Details</button> -->
+          </div>
+        </div>
+
+        <h4>Performance Overview</h4>
+
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0 0">Top rated drivers</h4>
+          <div
+            class="performance-overview-container"
+            id="top-rated-drivers-container"
+          ></div>
+        </div>
+
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0">Drivers with most rides</h4>
+          <div
+            class="performance-overview-container"
+            id="most-completed-rides-drivers-container"
+          ></div>
+        </div>
+
+        <div class="top-performer-container">
+          <h4 style="margin: 10px 0">Low rated drivers</h4>
+          <div
+            class="performance-overview-container"
+            id="low-rated-drivers-container"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/admin/reports.js"></script>
+  </body>
+</html>

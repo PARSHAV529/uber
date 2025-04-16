@@ -1,0 +1,108 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/driver/driverRideAccepted.css" />
+    <script
+      src="https://cdn.socket.io/4.1.2/socket.io.min.js"
+      integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
+  </head>
+  <body>
+    <div id="blur-background"></div>
+    <div class="container">
+      <!-- Sidebar -->
+      <%- include('../includes/driverSidebar.ejs') %>
+      <div class="ride-card">
+        <div class="ride-details">
+          <div class="ride-info">
+            <span>Pickup:</span>
+            <h3 id="pickup">Location A</h3>
+          </div>
+          <div class="ride-info">
+            <span>Drop:</span>
+            <h3 id="drop">Location B</h3>
+          </div>
+          <div class="ride-info">
+            <span>Distance:</span>
+            <h3 id="distance">10 km</h3>
+          </div>
+          <div class="ride-info">
+            <span>Fare Amount:</span>
+            <h3 id="fare"></h3>
+          </div>
+          <div class="ride-info">
+            <span>UserName:</span>
+            <h3 id="username">John Doe</h3>
+          </div>
+          <div class="ride-info">
+            <span>Mobile No:</span>
+            <h3 id="mobile">+91 98765 43210</h3>
+          </div>
+          <button id="btnRideStart">Start Ride</button>
+          <button id="btnRidecomplete">Complete Ride</button>
+        </div>
+      </div>
+
+      <div class="map" id="map"></div>
+      <div class="confirm-ride">
+        <div class="modal" id="otp-section">
+          <div class="modal-content">
+            <img
+              src="/source/close-button.png"
+              class="close-btn"
+              onclick="closeOtpSection()"
+            />
+            <div class="header">
+              <h2>Verify Your Ride by entering OTP</h2>
+              <img src="/source/otp.png" alt="OTP Icon" class="otp-icon" />
+            </div>
+            <p></p>
+            <div class="code-inputs">
+              <input type="text" maxlength="1" id="otp1" class="otp"/>
+              <input type="text" maxlength="1" id="otp2" class="otp"/>
+              <input type="text" maxlength="1" id="otp3" class="otp"/>
+              <input type="text" maxlength="1" id="otp4" class="otp"/>
+              <input type="text" maxlength="1" id="otp5" class="otp"/>
+              <input type="text" maxlength="1" id="otp6" class="otp"/>
+            </div>
+            <button class="verify-button" onclick="verifyOtp()">
+              Verify OTP
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="complete-ride" id="complete-ride">
+        <img
+          src="/source/close-button.png"
+          class="close-btn"
+          onclick="closeCompRideSection()"
+        />
+        <h3>Select Payment method :</h3>
+        <h3 id="fareComplete"></h3>
+        <label>Choose : </label>
+        <select name="payment-type" id="payment-type" onchange="checkMethod()">
+          <option value="Cash">Cash</option>
+          <option value="online">QR / Online</option>
+        </select>
+        <div id="qrImage">
+          <img src="" id="imgQr" alt="" />
+        </div>
+        <h5 id="paymentMsg">Confirm payment before completing ride.</h5>
+        <button id="FinalSubmit">Complete</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/js/driver/driverRideAccepted.js"></script>
+    <script src="/js/sidebar.js"></script>
+  </body>
+</html>
