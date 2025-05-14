@@ -1,0 +1,19 @@
+version: '1'
+services :
+ web :
+  build: .
+  ports:
+   - "8080:8080"
+ db:
+  image: "mysql:5.7"
+  ports:
+   - "3306:3306"
+  environment:
+   MYSQL_ROOT_PASSWORD: neh59
+  volumes:
+   - db-data:/foo
+volumes:
+  db-data:
+    
+     
+

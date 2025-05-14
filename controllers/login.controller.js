@@ -17,7 +17,8 @@ export const loginUser = async (req, res) => {
     const [hashedPassword] = await db.query(
       `select password from uber_user where email='${email}'`
     );
-console.log(hashedPassword);
+console.log("hashedPassword");
+// console.log(hashedPassword);
 
     const pwd = await bcrypt.compare(password, hashedPassword[0].password);
 
@@ -26,7 +27,7 @@ console.log(hashedPassword);
       const query = `select * from uber_user where email='${email}' and password='${hashedPassword[0].password}'`;
       const [data] = await db.query(query);
 
-      console.log(data)
+      // console.log(data)
       const [d_id] = await db.query(
         `select id from driver where user_id='${data[0].id}'`
       );

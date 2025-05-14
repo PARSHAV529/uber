@@ -221,7 +221,8 @@ app.get("/driver/qr-page", (req, res) => {
 });
 const PORT = process.env.PORT || 8080;
 
-const httpServer = app.listen(PORT, () => {
+// ,'0.0.0.0'
+const httpServer = app.listen(8080, () => {
   console.log(`server is live on port http://localhost:${PORT}`);
 });
 const io = new Server(httpServer, {
@@ -251,7 +252,7 @@ io.on("connection", (socket) => {
       // const userId = decoded.id;
    const [result]= await db.execute('update driver set live_location=? where id =?',[JSON.stringify(data),data.decoded.id]);
     io.emit('driver-location', data)
-    console.log(result);
+    // console.log(result);
     
   }
   );

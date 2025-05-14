@@ -148,7 +148,7 @@ mapInstance = olaMaps.init({
   container: "map",
   center: [77.61648476788898, 12.932323492103944 ],
   
-  zoom: 15,
+  zoom: 25,
 });
 // const olaMarker = new OlaMaps.Marker({
   
@@ -192,17 +192,15 @@ function decodePolyline(encoded) {
 // Function to calculate initial route
 let routePolyline
 async function calculateRoute(sourceCoords, destCoords) {
-  console.log();
   try {
     const response = await fetch(
       `https://api.olamaps.io/routing/v1/directions?origin=${sourceCoords[1]},${sourceCoords[0]}&destination=${destCoords[1]},${destCoords[0]}&api_key=jkVOPvqEWskRwgMNvZDbpXevwGfdagTFu9gj4hdz`,
       { method: "POST" }
     );
     const data = await response.json();
-    console.log(data);
 
     if (data.status === "SUCCESS" && data.routes && data.routes.length > 0) {
-      routePolyline = decodePolyline(data.routes[0].overview_polyline);
+      let routePolyline = decodePolyline(data.routes[0].overview_polyline);
       routePolyline.unshift(sourceCoords);
       routePolyline.push(destCoords);
 
@@ -211,41 +209,49 @@ async function calculateRoute(sourceCoords, destCoords) {
         geometry: { type: "LineString", coordinates: routePolyline },
       };
 
+      // Update existing source if already added
       if (mapInstance.getSource("route-source")) {
-        mapInstance.removeSource("route-source");
+        mapInstance.getSource("route-source").setData(routeGeojson);
+      } else {
+        mapInstance.addSource("route-source", {
+          type: "geojson",
+          data: routeGeojson,
+        });
+
+        mapInstance.addLayer({
+          id: "route-layer",
+          type: "line",
+          source: "route-source",
+          paint: {
+            "line-color": "blue",
+            "line-width": 5,
+            "line-opacity": 1,
+          },
+        });
       }
-      mapInstance.addSource("route-source", {
-        type: "geojson",
-        data: routeGeojson,
-      });
-      mapInstance.addLayer({
-        id: "route-layer",
-        type: "line",
-        source: "route-source",
-        paint: {
-          "line-color": "blue",
-          "line-width": 5,
-          "line-opacity": 1,
-        },
-      });
-      
-      // Fit bounds
-      const bounds = routePolyline.reduce(
-        (bounds, coord) => [
-          [Math.min(bounds[0][0], coord[0]), Math.min(bounds[0][1], coord[1])],
-          [Math.max(bounds[1][0], coord[0]), Math.max(bounds[1][1], coord[1])],
-        ],
-        [sourceCoords, sourceCoords]
-      );
-      mapInstance.fitBounds(bounds, { padding: 100, maxZoom: 15 });
+
+      // Optional: Fit bounds only once (e.g., during first draw)
+      if (!window.boundsFitted) {
+        const bounds = routePolyline.reduce(
+          (bounds, coord) => [
+            [Math.min(bounds[0][0], coord[0]), Math.min(bounds[0][1], coord[1])],
+            [Math.max(bounds[1][0], coord[0]), Math.max(bounds[1][1], coord[1])],
+          ],
+          [sourceCoords, sourceCoords]
+        );
+        mapInstance.fitBounds(bounds, { padding: 100, maxZoom: 25 });
+        window.boundsFitted = true;
+      }
     } else {
-      calculateRoute(sourceCoords,destCoords)
+      // Retry if failed
+      calculateRoute(sourceCoords, destCoords);
     }
   } catch (error) {
     console.error("Routing error:", error);
-calculateRoute(sourceCoords,destCoords)
+    calculateRoute(sourceCoords, destCoords);
   }
 }
+
 
 const olaMarker =olaMaps
 .addMarker({ offset: [0,6], anchor: "bottom",color: "red" })
@@ -269,27 +275,36 @@ const decoded = JSON.parse(atob(accessToken.split('.')[1]));
   if ("geolocation" in navigator) {
     navigator.geolocation.watchPosition(
       (position) => {
-        console.log(position);
-        let data = {
+        console.log("Position received:", position);
+        const data = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-          decoded
-          // token: document.cookie.split('accessToken=')[1].split(';')[0]
+          decoded, // your custom variable
         };
         socket.emit("update-driver-location", data);
       },
-      (err) => {
-        console.log(err);
+      (error) => {
+        console.log("Geolocation error:", error);
+        if (error.code === error.PERMISSION_DENIED) {
+          alert("Location access denied. Please enable location services in your browser or device settings.");
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          alert("Location information is unavailable. Please check your GPS or network.");
+        } else if (error.code === error.TIMEOUT) {
+          alert("Location request timed out. Please try again.");
+        } else {
+          alert("An unknown error occurred while accessing your location.");
+        }
       },
       {
         enableHighAccuracy: true,
         maximumAge: 0,
-        timeout: 10000,
+        timeout: 30000,
       }
     );
   } else {
-    console.log("geolocation not supported");
+    alert("Geolocation is not supported by your browser.");
   }
+  
 });
 const marker = olaMaps.addMarker({})
 let driverpts=[]
@@ -361,5 +376,7 @@ socket.on("driver-location", (data) => {
 
 olaMarker.setLngLat([data.lng, data.lat])
 calculateRoute([data.lng,data.lat], [72.51421699689487,23.073935765844265])
+console.log("route updated");
+
 
 })
